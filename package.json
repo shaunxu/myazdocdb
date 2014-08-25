@@ -1,0 +1,30 @@
+{
+  "name": "myazdocdb",
+  "version": "0.0.0",
+  "description": "Microsoft Azure DocumentDB Management Website",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shaunxu/myazdocdb.git"
+  },
+  "keywords": [
+    "documentdb",
+    "azure"
+  ],
+  "author": "Shaun Xu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shaunxu/myazdocdb/issues"
+  },
+  "dependencies": {
+    "express": "~4.8.5",
+    "optimist": "~0.6.1",
+    "log4js": "~0.6.19",
+    "body-parser": "~1.6.5",
+    "compression": "~1.0.11"
+  }
+}
