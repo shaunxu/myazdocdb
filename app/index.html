@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html data-ng-app="myazdocdb">
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>My DocumentDB</title>
+
+        <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.css" />
+        <link rel="stylesheet" href="/lib/angular-ui/ng-grid.css" />
+    </head>
+    <body>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">My DocumentDB</a>
+                </div>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right" data-ng-controller="CurrentUserCtrl">
+                    <li class="dropdown" data-ng-show="isLoggedIn">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">{{name}} <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="javascript:void(0)" data-ng-click="">Setting</a></li>
+                            <li class="divider"></li>
+                            <li><a href="javascript:void(0)" data-ng-click="logout()">Sign Out</a></li>
+                        </ul>
+                    </li>
+                    <li data-ng-show="!isLoggedIn"><a data-ui-sref="login">Sign In</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="/lib/jquery/jquery-2.1.0.js"></script>
+        <script type="text/javascript" src="/lib/jquery/jquery-ui.js"></script>
+        <script type="text/javascript" src="/lib/bootstrap/scripts/bootstrap.js"></script>
+        <script type="text/javascript" src="/lib/angular/angular.js"></script>
+        <script type="text/javascript" src="/lib/angular-ui/angular-ui-router.js"></script>
+        <script type="text/javascript" src="/lib/angular-ui/ui-bootstrap-tpls-0.10.0.js"></script>
+        <script type="text/javascript" src="/lib/angular-ui/ng-grid-2.0.11.debug.js"></script>
+
+        <script type="text/javascript" src="/app.js"></script>
+    </body>
+</html>

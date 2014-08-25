@@ -39,7 +39,12 @@
     app.use(compression());
     // redirect all html requests to `index.html`
     app.use(function (req, res, next) {
-        if (path.extname(req.path).length > 0) {
+        console.log(req.path);
+        if (path.sep(req.path)[0] === 'api') {
+            // api request
+            next();
+        }
+        else if (path.extname(req.path).length > 0) {
             // normal static file request
             next();
         }
@@ -50,9 +55,13 @@
         }
     });
     // static file serve
-    app.use(express.static(__dirname));
+    app.use(express.static(__dirname + 'app'));
+
+    // launch api
+    var api = require('./api');
+    api.initialize(app);
 
     app.listen(argv['port']);
     logger.info('http://0.0.0.0:' + argv['port'] + '/');
-    process.title = 'My Azure DocumentDB';
+    process.title = 'My DocumentDB';
 })();
