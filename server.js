@@ -40,7 +40,7 @@
     // redirect all html requests to `index.html`
     app.use(function (req, res, next) {
         console.log(req.path);
-        if (path.sep(req.path)[0] === 'api') {
+        if (req.path.split('/')[1] === 'api') {
             // api request
             next();
         }
