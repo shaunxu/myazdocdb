@@ -8,7 +8,7 @@
         .argv;
 
     var log4js = require('log4js');
-    var logger = log4js.getLogger('WEB-SERVER');
+    var logger = log4js.getLogger('MYDOCDB');
     if (argv['debug'] === true) {
         logger.setLevel('DEBUG');
     }
@@ -32,14 +32,14 @@
         next();
     });
     // url encoding
-    var bodyParser = require('body-parser')
-    app.use(bodyParser.urlencoded());
+    var bodyParser = require('body-parser');
+    app.use(bodyParser.urlencoded({ extended: false }));
+    app.use(bodyParser.json());
     // gzip
     var compression = require('compression')
     app.use(compression());
     // redirect all html requests to `index.html`
     app.use(function (req, res, next) {
-        console.log(req.path);
         if (req.path.split('/')[1] === 'api') {
             // api request
             next();
@@ -59,7 +59,7 @@
 
     // launch api
     var api = require('./api');
-    api.initialize(app);
+    api.initialize(app, logger);
 
     app.listen(argv['port']);
     logger.info('http://0.0.0.0:' + argv['port'] + '/');
