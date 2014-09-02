@@ -1,37 +1,44 @@
 <!DOCTYPE html>
-<html data-ng-app="myazdocdb">
+<html data-ng-app="MyDocDB">
     <head lang="en">
         <meta charset="UTF-8">
         <title>My DocumentDB</title>
 
         <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.css" />
         <link rel="stylesheet" href="/lib/angular-ui/ng-grid.css" />
+        <link rel="stylesheet" href="/styles/theme.css" />
     </head>
     <body>
-        <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <div class="container">
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/">My DocumentDB</a>
+                    <a class="navbar-brand" href="#">My DocumentDB</a>
+                </div>
+                <div class="navbar-collapse collapse" data-ng-controller="ConnectionCtrl">
+                    <form class="navbar-form navbar-right" role="form">
+                        <div class="form-group">
+                            <input type="text" placeholder="Host" class="form-control" data-ng-model="host">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" placeholder="Key" class="form-control" data-ng-model="key">
+                        </div>
+                        <button type="button" class="btn btn-success" data-ng-click="connect()">{{action}}</button>
+                    </form>
                 </div>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right" data-ng-controller="CurrentUserCtrl">
-                    <li class="dropdown" data-ng-show="isLoggedIn">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">{{name}} <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="javascript:void(0)" data-ng-click="">Setting</a></li>
-                            <li class="divider"></li>
-                            <li><a href="javascript:void(0)" data-ng-click="logout()">Sign Out</a></li>
-                        </ul>
-                    </li>
-                    <li data-ng-show="!isLoggedIn"><a data-ui-sref="login">Sign In</a></li>
-                </ul>
-            </div>
+        </div>
+
+        <div class="container">
+            <div data-ui-view></div>
+            <footer>
+                <p>&copy; Shaun Xu</p>
+            </footer>
         </div>
 
         <script type="text/javascript" src="/lib/jquery/jquery-2.1.0.js"></script>
@@ -43,5 +50,7 @@
         <script type="text/javascript" src="/lib/angular-ui/ng-grid-2.0.11.debug.js"></script>
 
         <script type="text/javascript" src="/app.js"></script>
+        <script type="text/javascript" src="/controllers/connectionCtrl.js"></script>
+        <script type="text/javascript" src="/controllers/dashboardCtrl.js"></script>
     </body>
 </html>

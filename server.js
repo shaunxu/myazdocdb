@@ -55,7 +55,7 @@
         }
     });
     // static file serve
-    app.use(express.static(__dirname + 'app'));
+    app.use(express.static(__dirname + '/app'));
 
     // launch api
     var api = require('./api');

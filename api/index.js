@@ -25,7 +25,7 @@
                             controller[actionName](client, params, function (error, result) {
                                 if (error) {
                                     logger.error(error);
-                                    res.send(500, error);
+                                    res.status(500).send(error);
                                 }
                                 else {
                                     result = result || {};
@@ -35,19 +35,19 @@
                             });
                         }
                         else {
-                            res.send(500, 'Cannot find action [' + actionName + '] in controller [' + controllerName + '] from request path [' + req.path + ']');
+                            res.status(500).send('Cannot find action [' + actionName + '] in controller [' + controllerName + '] from request path [' + req.path + ']');
                         }
                     }
                     else {
-                        res.send(500, 'Cannot find controller [' + controllerName + '] from request path [' + req.path + ']');
+                        res.status(500).send('Cannot find controller [' + controllerName + '] from request path [' + req.path + ']');
                     }
                 }
                 else {
-                    res.send(500, 'Invalid api request [' + req.path + ']');
+                    res.status(500).send('Invalid api request [' + req.path + ']');
                 }
             }
             else {
-                res.send(401, 'Miss host or key.');
+                res.status(500).send('Miss host or key.');
             }
         });
     };
