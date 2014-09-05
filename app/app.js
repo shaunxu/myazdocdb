@@ -2,7 +2,8 @@
 
 var app = angular.module('MyDocDB', [
     'ui.router',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'ngGrid'
 ]);
 
 app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
@@ -16,7 +17,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
     $stateProvider.state('databases', {
         url: '/databases',
         templateUrl: '/views/database/index.html',
-        controller: 'DatabaseCtrl' });
+        controller: 'DatabaseIndexCtrl' });
 }]);
 
 app.value('$', $);

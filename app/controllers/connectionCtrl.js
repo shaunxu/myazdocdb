@@ -5,8 +5,7 @@
         var refresh = function () {
             $scope.host = credentials.host;
             $scope.key = credentials.key;
-            $scope.action = credentials.isConnected() === true ? 'Disconnect' : 'Connect';
-            $scope.connect = credentials.isConnected() === true ? disconnect : connect;
+            $scope.connect = connect;
         };
 
         var connect = function () {
@@ -18,12 +17,6 @@
             else {
                 $alert('Please specify host and key.');
             }
-        };
-
-        var disconnect = function () {
-            credentials.reset();
-            refresh();
-            $state.go('dashboard', undefined, undefined);
         };
 
         // TODO: test purpose remove them release

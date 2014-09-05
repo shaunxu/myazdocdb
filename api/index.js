@@ -24,7 +24,7 @@
                             var params = req.body || {};
                             controller[actionName](client, params, function (error, result) {
                                 if (error) {
-                                    logger.error(error);
+                                    logger.error(controllerName + '/' + actionName + ' ...\n' + 'params: ' + JSON.stringify(params, null, 2) + '\n' + 'error: ' + JSON.stringify(error, null, 2));
                                     res.status(500).send(error);
                                 }
                                 else {
