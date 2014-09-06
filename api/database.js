@@ -1,6 +1,8 @@
 (function () {
     'use strict';
 
+    var async = require('async');
+
     var _logger = null;
 
     var _select = function (client, params, callback) {

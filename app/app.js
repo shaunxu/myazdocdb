@@ -18,6 +18,11 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
         url: '/databases',
         templateUrl: '/views/database/index.html',
         controller: 'DatabaseIndexCtrl' });
+
+    $stateProvider.state('collections', {
+        url: '/collections/:dbSelf',
+        templateUrl: '/views/collections/index.html',
+        controller: 'CollectionIndexCtrl' });
 }]);
 
 app.value('$', $);
