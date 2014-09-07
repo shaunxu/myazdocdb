@@ -8,7 +8,9 @@
             <th>Self</th>
             <th>Timestamp</th>
             <th>ETag</th>
-            <th>Actions</th>
+            <th>
+                <button type="button" class="btn btn-success btn-xs btn-block" data-ng-click="create()">Create</button>
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -21,7 +23,7 @@
             <td>{{database._ts}}</td>
             <td>{{database._etag}}</td>
             <td>
-                <button type="button" class="btn btn-danger btn-xs">Delete</button>
+                <button type="button" class="btn btn-danger btn-xs btn-block" data-ng-click="delete(database.id, database._self)">Delete</button>
             </td>
         </tr>
     </tbody>
