@@ -19,22 +19,23 @@
 
     var _create = function (client, params, callback) {
         var id = params.id;
+        var databaseLink = params.databaseLink;
         if (id && id.length > 0) {
-            _select(client, { id: id }, function (error, dbs) {
+            _select(client, params, function (error, cols) {
                 if (error) {
                     return callback(error, null);
                 }
                 else {
-                    if (dbs && dbs.length > 0) {
-                        return callback('Database with id [' + id + '] exists.', null);
+                    if (cols && cols.length > 0) {
+                        return callback('Collection with id [' + id + '] exists in database [' + databaseLink + '] .', null);
                     }
                     else {
-                        client.createDatabase({ id: id }, function (error, db) {
+                        client.createCollection(databaseLink, { id: id }, function (error, col) {
                             if (error) {
                                 return callback(error, null);
                             }
                             else {
-                                return callback(null, db);
+                                return callback(null, col);
                             }
                         });
                     }
@@ -42,14 +43,13 @@
             });
         }
         else {
-            callback('Database id was null or empty.', null);
+            callback('Collection id was null or empty.', null);
         }
     };
 
     var _removeDirect = function (client, params, callback) {
-        var resourceId = params.resourceId;
-        var selfLink = params.selfLink || ('dbs/' + resourceId);
-        client.deleteDatabase(selfLink, function (error) {
+        var selfLink = params.selfLink;
+        client.deleteCollection(selfLink, function (error) {
             if (error) {
                 return callback(error);
             }
@@ -61,28 +61,29 @@
 
     var _remove = function (client, params, callback) {
         var id = params.id;
+        var databaseLink = params.databaseLink;
         if (id && id.length > 0) {
-            _select(client, { id: id }, function (error, dbs) {
+            _select(client, params, function (error, cols) {
                 if (error) {
                     return callback(error);
                 }
                 else {
-                    if (dbs && dbs.length > 0) {
-                        if (dbs.length > 1) {
-                            return callback('Multiple databases with same id [' + id + '].');
+                    if (cols && cols.length > 0) {
+                        if (cols.length > 1) {
+                            return callback('Multiple collections with same id [' + id + '] in database [' + databaseLink + '].');
                         }
                         else {
-                            _removeDirect(client, { selfLink: dbs[0]['_self'] }, callback);
+                            _removeDirect(client, { selfLink: cols[0]['_self'] }, callback);
                         }
                     }
                     else {
-                        return callback('Database with id [' + id + '] does not exist.');
+                        return callback('Collection with id [' + id + '] does not exist in database [' + databaseLink + '].');
                     }
                 }
             });
         }
         else {
-            callback('Database id was null or empty.');
+            callback('Collection id was null or empty.');
         }
     };
 
