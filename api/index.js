@@ -4,7 +4,17 @@
     var DocumentDBClient = require('documentdb').DocumentClient;
 
     exports.initialize = function (app, logger) {
-        var database = require('./database.js')(logger);
+        var _validate = function (controller, params, callback) {
+            var validator = controller['validate'];
+            if (validator) {
+                validator(params, function (error) {
+                    return callback(error);
+                });
+            }
+            else {
+                return callback(null);
+            }
+        };
 
         app.use(function (req, res) {
             var host = req.headers['x-docdb-host'];
@@ -22,15 +32,24 @@
                         if (controller[actionName]) {
                             var client = new DocumentDBClient(host, { masterKey: key });
                             var params = req.body || {};
-                            controller[actionName](client, params, function (error, result) {
+                            // perform validate if defined inside controller
+                            _validate(controller, params, function (error) {
                                 if (error) {
-                                    logger.error(controllerName + '/' + actionName + ' ...\n' + 'params: ' + JSON.stringify(params, null, 2) + '\n' + 'error: ' + JSON.stringify(error, null, 2));
                                     res.status(500).send(error);
                                 }
                                 else {
-                                    result = result || {};
-                                    logger.debug(result);
-                                    res.json(result);
+                                    // perform the action
+                                    controller[actionName](client, params, function (error, result) {
+                                        if (error) {
+                                            logger.error(controllerName + '/' + actionName + ' ...\n' + 'params: ' + JSON.stringify(params, null, 2) + '\n' + 'error: ' + JSON.stringify(error, null, 2));
+                                            res.status(500).send(error);
+                                        }
+                                        else {
+                                            result = result || {};
+                                            logger.debug(controllerName + '/' + actionName + ' ...\n' + 'params: ' + JSON.stringify(params, null, 2) + '\n' + 'result: ' + JSON.stringify(result, null, 2));
+                                            res.json(result);
+                                        }
+                                    });
                                 }
                             });
                         }

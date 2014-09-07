@@ -5,13 +5,14 @@
 
     var _select = function (client, params, callback) {
         var id = params.id;
+        var databaseLink = params.databaseLink;
         var query = 'SELECT * FROM ROOT' + (id ? ' r WHERE r.id = "' + id + '"' : '');
-        client.queryDatabases(query).toArray(function (error, dbs) {
+        client.queryCollections(databaseLink, query).toArray(function (error, cols) {
             if (error) {
                 return callback(error, null);
             }
             else {
-                return callback(null, dbs);
+                return callback(null, cols);
             }
         });
     };
@@ -92,7 +93,15 @@
             list: _select,
             create: _create,
             remove: _remove,
-            removeDirect: _removeDirect
+            removeDirect: _removeDirect,
+            validate: function (params, callback) {
+                if (params.databaseLink && params.databaseLink.length > 0) {
+                    return callback(null);
+                }
+                else {
+                    return callback('Miss database link in request.');
+                }
+            }
         };
     };
 })();

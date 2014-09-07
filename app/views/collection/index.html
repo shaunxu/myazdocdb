@@ -1,0 +1,30 @@
+<h1>Collections</h1>
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>ID</th>
+        <th>Self</th>
+        <th>Timestamp</th>
+        <th>ETag</th>
+        <th>
+            <button type="button" class="btn btn-success btn-xs btn-block" data-ng-click="create()">Create</button>
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr data-ng-repeat="collection in collections">
+        <td>{{$index + 1}}</td>
+        <td>
+            <a data-ui-sref="collections({ dbSelf: database.id })">{{collection.id}}</a>
+        </td>
+        <td>{{collection._self}}</td>
+        <td>{{collection._ts}}</td>
+        <td>{{collection._etag}}</td>
+        <td>
+            <button type="button" class="btn btn-danger btn-xs btn-block" data-ng-click="delete(collection.id, collection._self)">Delete</button>
+        </td>
+    </tr>
+    </tbody>
+</table>

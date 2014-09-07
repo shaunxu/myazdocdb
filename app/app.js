@@ -19,9 +19,9 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
         templateUrl: '/views/database/index.html',
         controller: 'DatabaseIndexCtrl' });
 
-    $stateProvider.state('collections', {
-        url: '/collections/:dbSelf',
-        templateUrl: '/views/collections/index.html',
+    $stateProvider.state('collection', {
+        url: '/collection/?id&l',
+        templateUrl: '/views/collection/index.html',
         controller: 'CollectionIndexCtrl' });
 }]);
 
