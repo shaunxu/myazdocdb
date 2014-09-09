@@ -12,17 +12,26 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
     $stateProvider.state('dashboard', {
         url: '/',
         templateUrl: '/views/dashboard.html',
-        controller: 'DashboardCtrl' });
+        controller: 'DashboardCtrl'
+    });
+
+    $stateProvider.state('console', {
+        url: '/console',
+        templateUrl: '/views/console.html',
+        controller: 'ConsoleCtrl'
+    });
 
     $stateProvider.state('databases', {
         url: '/databases',
         templateUrl: '/views/database/index.html',
-        controller: 'DatabaseIndexCtrl' });
+        controller: 'DatabaseIndexCtrl'
+    });
 
     $stateProvider.state('collection', {
         url: '/collection/?id&l',
         templateUrl: '/views/collection/index.html',
-        controller: 'CollectionIndexCtrl' });
+        controller: 'CollectionIndexCtrl'
+    });
 }]);
 
 app.value('$', $);

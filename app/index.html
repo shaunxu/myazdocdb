@@ -18,17 +18,27 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">My DocumentDB</a>
+                    <a class="navbar-brand" href="#">
+                        <b>My DocumentDB</b>
+                    </a>
                 </div>
-                <div class="navbar-collapse collapse" data-ng-controller="ConnectionCtrl">
+                <div class="navbar-collapse collapse"  data-ng-controller="ConnectionCtrl">
+                    <ul class="nav navbar-nav" data-ng-show="isConnected">
+                        <li><a data-ui-sref="databases">Explorer</a></li>
+                        <li><a data-ui-sref="console">Console</a></li>
+                    </ul>
                     <form class="navbar-form navbar-right" role="form">
-                        <div class="form-group">
+                        <div class="form-group" data-ng-show="!isConnected">
                             <input type="text" placeholder="Host" class="form-control" data-ng-model="host">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" data-ng-show="!isConnected">
                             <input type="text" placeholder="Key" class="form-control" data-ng-model="key">
                         </div>
-                        <button type="button" class="btn btn-success" data-ng-click="connect()">Connect</button>
+                        <div class="form-group" data-ng-show="isConnected">
+                            <input type="text" readonly class="form-control" data-ng-model="host">
+                        </div>
+                        <button type="button" class="btn btn-success" data-ng-show="!isConnected" data-ng-click="connect()">Connect</button>
+                        <button type="button" class="btn btn-success" data-ng-show="isConnected" data-ng-click="disconnect()">Disconnect</button>
                     </form>
                 </div>
             </div>
@@ -52,6 +62,7 @@
         <script type="text/javascript" src="/app.js"></script>
         <script type="text/javascript" src="/controllers/connectionCtrl.js"></script>
         <script type="text/javascript" src="/controllers/dashboardCtrl.js"></script>
+        <script type="text/javascript" src="/controllers/consoleCtrl.js"></script>
         <script type="text/javascript" src="/controllers/databaseCtrl.js"></script>
         <script type="text/javascript" src="/controllers/collectionCtrl.js"></script>
     </body>
