@@ -34,7 +34,9 @@
                             // perform validate if defined inside controller
                             _validate(controller, params, function (error) {
                                 if (error) {
-                                    res.status(500).send(error);
+                                    var message = controllerName + '/' + actionName + ' ...\n' + 'params: ' + JSON.stringify(params, null, 2) + '\n' + 'error: ' + JSON.stringify(error, null, 2);
+                                    logger.error(message);
+                                    res.status(500).send(message);
                                 }
                                 else {
                                     // perform the action
