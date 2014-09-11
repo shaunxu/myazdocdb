@@ -5,12 +5,26 @@
 
     app.controller('DocumentIndexCtrl', function ($scope, $stateParams, $alert, $modal, api) {
         var refresh = function () {
-            api.request(controllerName, 'list', { databaseLink: $scope.db.link }, function (error, cols) {
+            api.request(controllerName, 'list', { collectionLink: $scope.col.collectionLink }, function (error, docs) {
                 if (error) {
                     $alert(JSON.stringify(error, null, 2));
                 }
                 else {
-                    $scope.collections = cols;
+                    docs.forEach(function (doc) {
+                        var model = {
+                            expanded: false,
+                            id: doc.id,
+                            _self: doc._self,
+                            _ts: doc._ts,
+                            _etag: doc._etag
+                        };
+                        delete doc.id;
+                        delete doc._self;
+                        delete doc._ts;
+                        delete doc._etag;
+                        model.body = doc;
+                        $scope.documents.push(model);
+                    });
                 }
             });
         };

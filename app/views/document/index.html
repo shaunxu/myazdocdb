@@ -1,34 +1,41 @@
-<h1>Documents: '{{db.id}}' > '{{col.id}}'</h1>
+<h1>Documents: '{{col.databaseId}}' > '{{col.collectionId}}'</h1>
 
 <table class="table table-striped">
     <thead>
-    <tr>
-        <th>#</th>
-        <th>ID</th>
-        <th>Self</th>
-        <th>Timestamp</th>
-        <th>ETag</th>
-        <th>
-            <button type="button" class="btn btn-success btn-xs btn-block" data-ng-click="create()">Create</button>
-        </th>
-    </tr>
+        <tr>
+            <th>#</th>
+            <th>ID</th>
+            <th>Self</th>
+            <th>Timestamp</th>
+            <th>ETag</th>
+            <th>
+                <button type="button" class="btn btn-success btn-xs btn-block" data-ng-click="create()">Create</button>
+            </th>
+        </tr>
     </thead>
-    <tbody>
-    <tr data-ng-repeat="document in documents">
-        <td>
-            {{$index + 1}}
-            <span class="glyphicon glyphicon-chevron-up" data-ng-show="document.expanded" data-ng-click="document.expanded = true"></span>
-            <span class="glyphicon glyphicon-chevron-down" data-ng-show="!document.expanded" data-ng-click="document.expanded = false"></span>
-        </td>
-        <td>
-            <a data-ui-sref="documents({ dbSelf: database.id })">{{document.id}}</a>
-        </td>
-        <td>{{document._self}}</td>
-        <td>{{document._ts}}</td>
-        <td>{{document._etag}}</td>
-        <td>
-            <button type="button" class="btn btn-danger btn-xs btn-block" data-ng-click="delete(document.id, document._self)">Delete</button>
-        </td>
-    </tr>
+    <tbody data-ng-repeat="document in documents">
+        <tr>
+            <td>
+                {{$index + 1}}
+                <span class="glyphicon glyphicon-chevron-up" data-ng-show="document.expanded" data-ng-click="document.expanded = true"></span>
+                <span class="glyphicon glyphicon-chevron-down" data-ng-show="!document.expanded" data-ng-click="document.expanded = false"></span>
+            </td>
+            <td>
+                <a data-ui-sref="documents({ dbSelf: database.id })">{{document.id}}</a>
+            </td>
+            <td>{{document._self}}</td>
+            <td>{{document._ts}}</td>
+            <td>{{document._etag}}</td>
+            <td>
+                <button type="button" class="btn btn-danger btn-xs btn-block" data-ng-click="delete(document.id, document._self)">Delete</button>
+            </td>
+        </tr>
+        <tr data-ng-show="document.expanded">
+            <td colspan="5">
+                <pre>
+                    {{JSON.stringify(document.body, null, 2)}}
+                </pre>
+            </td>
+        </tr>
     </tbody>
 </table>
