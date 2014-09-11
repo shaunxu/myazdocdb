@@ -30,7 +30,6 @@
                     var controller = require('./' + controllerName + '.js')(logger);
                     if (controller) {
                         if (controller[actionName]) {
-                            var client = new DocumentDBClient(host, { masterKey: key });
                             var params = req.body || {};
                             // perform validate if defined inside controller
                             _validate(controller, params, function (error) {
@@ -39,6 +38,7 @@
                                 }
                                 else {
                                     // perform the action
+                                    var client = new DocumentDBClient(host, { masterKey: key });
                                     controller[actionName](client, params, function (error, result) {
                                         if (error) {
                                             var message = controllerName + '/' + actionName + ' ...\n' + 'params: ' + JSON.stringify(params, null, 2) + '\n' + 'error: ' + JSON.stringify(error, null, 2);

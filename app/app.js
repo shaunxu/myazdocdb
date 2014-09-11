@@ -82,6 +82,7 @@ app.factory('api', function ($http, credentials) {
                     return callback(null, data);
                 })
                 .error(function (error) {
+                    alert(JSON.stringify(error, null, 2));
                     return callback(error, null);
                 });
         },
