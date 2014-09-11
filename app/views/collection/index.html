@@ -1,4 +1,4 @@
-<h1>Collections in database '{{db.id}}'</h1>
+<h1>Collections: '{{db.id}}'</h1>
 
 <table class="table table-striped">
     <thead>
@@ -17,7 +17,7 @@
     <tr data-ng-repeat="collection in collections">
         <td>{{$index + 1}}</td>
         <td>
-            <a data-ui-sref="collections({ dbSelf: database.id })">{{collection.id}}</a>
+            <a data-ui-sref="document({ did: db.id, cid: collection.id, cl: collection._self })">{{collection.id}}</a>
         </td>
         <td>{{collection._self}}</td>
         <td>{{collection._ts}}</td>

@@ -1,9 +1,9 @@
 (function () {
     'use strict';
 
-    var controllerName = 'collection';
+    var controllerName = 'document';
 
-    app.controller('CollectionIndexCtrl', function ($scope, $stateParams, $alert, $modal, api) {
+    app.controller('DocumentIndexCtrl', function ($scope, $stateParams, $alert, $modal, api) {
         var refresh = function () {
             api.request(controllerName, 'list', { databaseLink: $scope.db.link }, function (error, cols) {
                 if (error) {
@@ -51,15 +51,16 @@
             }, function () {});
         };
 
-        $scope.db = {
-            id: $stateParams.did,
-            link: $stateParams.dl
+        $scope.col = {
+            databaseId: $stateParams.did,
+            collectionId: $stateParams.cid,
+            collectionLink: $stateParams.cl
         };
 
         refresh();
     });
 
-    app.controller('CollectionCreateCtrl', function ($scope, $alert, $modalInstance, api, db) {
+    app.controller('DocumentCreateCtrl', function ($scope, $alert, $modalInstance, api, db) {
         $scope.id = '';
         $scope.db = db;
 
@@ -79,7 +80,7 @@
         };
     });
 
-    app.controller('CollectionDeleteCtrl', function ($scope, $alert, $modalInstance, api, db, col) {
+    app.controller('DocumentDeleteCtrl', function ($scope, $alert, $modalInstance, api, db, col) {
         $scope.id = '';
         $scope.db = db;
         $scope.col = col;

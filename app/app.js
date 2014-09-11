@@ -21,17 +21,24 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
         controller: 'ConsoleCtrl'
     });
 
-    $stateProvider.state('databases', {
+    $stateProvider.state('database', {
         url: '/databases',
         templateUrl: '/views/database/index.html',
         controller: 'DatabaseIndexCtrl'
     });
 
     $stateProvider.state('collection', {
-        url: '/collection/?id&l',
+        url: '/collections/?did&dl',
         templateUrl: '/views/collection/index.html',
         controller: 'CollectionIndexCtrl'
     });
+
+    $stateProvider.state('document', {
+        url: '/documents/?did&cid&cl',
+        templateUrl: '/views/document/index.html',
+        controller: 'DocumentIndexCtrl'
+    });
+
 }]);
 
 app.value('$', $);
