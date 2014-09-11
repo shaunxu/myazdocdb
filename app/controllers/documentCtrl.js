@@ -88,10 +88,19 @@
 
         $scope.ok = function (id, body) {
             // set body and id again in case user didn't put anything
-            console.log(body);
-            body = JSON.parse(body);
-            body.id = id;
+            try
+            {
+                body = JSON.parse(body);
+                body.id = id;
+            }
+            catch (ex)
+            {
+                $alert('Failed to parse document body with error ' + ex);
+                return;
+            }
+            // invoke api to create or update document
             $alert(JSON.stringify(body, null, 2));
+            $alert(col.collectionLink);
             api.request(controllerName, $scope.isUpdate ? 'update' : 'create', { body: body, collectionLink: col.collectionLink }, function (error, doc) {
                 if (error) {
                     $alert(JSON.stringify(error, null, 2));
