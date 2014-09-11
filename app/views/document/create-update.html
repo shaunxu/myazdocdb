@@ -1,0 +1,28 @@
+<div class="modal-header">
+    <h3 class="modal-title">{{isUpdate() ? 'Create' : 'Update'}} document in '{{col.databaseId}}' > '{{col.collectionId}}'</h3>
+</div>
+<div class="modal-body">
+    <form role="form">
+        <div class="form-group">
+            <label for="documentId">ID</label>
+            <input type="text" class="form-control" id="documentId" placeholder="ID" data-ng-model="doc.id" data-ng-readonly="isUpdate()">
+        </div>
+        <div class="form-group" data-ng-show="isUpdate()">
+            <label for="documentLink">Link</label>
+            <input type="text" class="form-control" id="documentLink" placeholder="ID" data-ng-model="doc._self" readonly>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-10">
+                <label for="body">Body (in JSON)</label>
+            </div>
+            <div class="col-sm-2">
+                <button type="button" class="btn btn-success btn-block" data-ng-click="validate(doc.body)">Validate</button>
+            </div>
+            <textarea class="form-control" rows="5" id="body" data-ng-model="doc.body"></textarea>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary" data-ng-click="ok(doc.id, doc.body)">{{isUpdate() ? 'Create' : 'Update'}}</button>
+    <button type="button" class="btn btn-default" data-ng-click="cancel()">Cancel</button>
+</div>

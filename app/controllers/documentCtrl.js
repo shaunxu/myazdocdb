@@ -31,13 +31,13 @@
 
         $scope.delete = function (id, selfLink) {
             var modalInstance = $modal.open({
-                templateUrl: 'views/collection/delete.html',
-                controller: 'CollectionDeleteCtrl',
+                templateUrl: 'views/document/delete.html',
+                controller: 'DocumentDeleteCtrl',
                 resolve: {
-                    db: function () {
-                        return $scope.db;
-                    },
                     col: function () {
+                        return $scope.col;
+                    },
+                    doc: function () {
                         return {
                             id: id,
                             link: selfLink
@@ -50,19 +50,26 @@
             }, function () {});
         };
 
-        $scope.create = function () {
+        $scope.createOrUpdate = function (doc) {
             var modalInstance = $modal.open({
-                templateUrl: 'views/collection/create.html',
-                controller: 'CollectionCreateCtrl',
+                templateUrl: 'views/document/create-update.html',
+                controller: 'DocumentCreateOrUpdateCtrl',
                 resolve: {
-                    db: function () {
-                        return $scope.db;
+                    col: function () {
+                        return $scope.col;
+                    },
+                    doc: function () {
+                        return doc;
                     }
                 }
             });
             modalInstance.result.then(function () {
                 refresh();
             }, function () {});
+        };
+
+        $scope.validate = function (body) {
+
         };
 
         $scope.col = {
@@ -74,17 +81,20 @@
         refresh();
     });
 
-    app.controller('DocumentCreateCtrl', function ($scope, $alert, $modalInstance, api, db) {
-        $scope.id = '';
-        $scope.db = db;
+    app.controller('DocumentCreateOrUpdateCtrl', function ($scope, $alert, $modalInstance, api, col, doc) {
+        $scope.doc = doc || {};
+        $scope.col = col;
+        $scope.isUpdate = function () {
+            return $scope.doc && $scope.doc.id;
+        };
 
-        $scope.ok = function (id) {
-            api.request(controllerName, 'create', { id: id, databaseLink: db.link }, function (error, col) {
+        $scope.ok = function (id, body) {
+            api.request(controllerName, $scope.isUpdate() ? 'update' : 'create', { body: body, collectionLink: col.collectionLink }, function (error, doc) {
                 if (error) {
                     $alert(JSON.stringify(error, null, 2));
                 }
                 else {
-                    $modalInstance.close(col);
+                    $modalInstance.close(doc);
                 }
             });
         };
@@ -94,14 +104,14 @@
         };
     });
 
-    app.controller('DocumentDeleteCtrl', function ($scope, $alert, $modalInstance, api, db, col) {
+    app.controller('DocumentDeleteCtrl', function ($scope, $alert, $modalInstance, api, col, doc) {
         $scope.id = '';
-        $scope.db = db;
         $scope.col = col;
+        $scope.doc = doc;
 
         $scope.ok = function (id) {
-            if (id === col.id) {
-                api.request(controllerName, 'remove', { id: id, databaseLink: db.link }, function (error) {
+            if (id === doc.id) {
+                api.request(controllerName, 'remove', { id: id, collectionLink: col.link }, function (error) {
                     if (error) {
                         $alert(JSON.stringify(error, null, 2));
                     }
@@ -111,7 +121,7 @@
                 });
             }
             else {
-                $alert('The name of the collection you typed was incorrect.');
+                $alert('The name of the document you typed was incorrect.');
             }
         };
 

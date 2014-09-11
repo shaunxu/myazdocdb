@@ -9,7 +9,7 @@
             <th>Timestamp</th>
             <th>ETag</th>
             <th>
-                <button type="button" class="btn btn-success btn-xs btn-block" data-ng-click="create()">Create</button>
+                <button type="button" class="btn btn-success btn-xs btn-block" data-ng-click="createOrUpdate(undefined)">Create</button>
             </th>
         </tr>
     </thead>
@@ -27,6 +27,7 @@
             <td>{{document._ts}}</td>
             <td>{{document._etag}}</td>
             <td>
+                <button type="button" class="btn btn-danger btn-xs btn-block" data-ng-click="createOrUpdate(document)">Edit</button>
                 <button type="button" class="btn btn-danger btn-xs btn-block" data-ng-click="delete(document.id, document._self)">Delete</button>
             </td>
         </tr>
