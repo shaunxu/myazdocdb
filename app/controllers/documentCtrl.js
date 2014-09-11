@@ -88,10 +88,11 @@
 
         $scope.ok = function (id, body) {
             // set body and id again in case user didn't put anything
+            var doc;
             try
             {
-                body = JSON.parse(body);
-                body.id = id;
+                doc = JSON.parse(body);
+                doc.id = id;
             }
             catch (ex)
             {
@@ -99,11 +100,12 @@
                 return;
             }
             // invoke api to create or update document
-            $alert(JSON.stringify(body, null, 2));
+            $alert(JSON.stringify(doc, null, 2));
             $alert(col.collectionLink);
-            api.request(controllerName, $scope.isUpdate ? 'update' : 'create', { body: body, collectionLink: col.collectionLink }, function (error, doc) {
+            api.request(controllerName, $scope.isUpdate ? 'update' : 'create', { body: doc, collectionLink: col.collectionLink }, function (error, doc) {
                 if (error) {
-                    $alert(JSON.stringify(error, null, 2));
+                    $alert(error);
+                    //$alert(JSON.stringify(error, null, 2));
                 }
                 else {
                     $modalInstance.close(doc);
