@@ -87,6 +87,10 @@
         $scope.isUpdate = $scope.doc && $scope.doc.id;
 
         $scope.ok = function (id, body) {
+            // set body and id again in case user didn't put anything
+            body = body || {};
+            body.id = id;
+            $alert(JSON.stringify(body, null, 2));
             api.request(controllerName, $scope.isUpdate ? 'update' : 'create', { body: body, collectionLink: col.collectionLink }, function (error, doc) {
                 if (error) {
                     $alert(JSON.stringify(error, null, 2));
