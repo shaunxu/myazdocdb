@@ -96,7 +96,7 @@
             }
             catch (ex)
             {
-                $alert('Failed to parse document body with error ' + ex);
+                $alert('Failed to parse document body with error \n' + ex);
                 return;
             }
             // invoke api to create or update document

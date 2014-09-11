@@ -83,7 +83,7 @@
             });
         }
         else {
-            callback('Collection id was null or empty.');
+            return callback('Collection id was null or empty.');
         }
     };
 

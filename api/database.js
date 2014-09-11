@@ -81,7 +81,7 @@
             });
         }
         else {
-            callback('Database id was null or empty.');
+            return callback('Database id was null or empty.');
         }
     };
 

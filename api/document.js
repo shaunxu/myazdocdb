@@ -83,7 +83,7 @@
             });
         }
         else {
-            callback('Document id was null or empty.');
+            return callback('Document id was null or empty.');
         }
     };
 
