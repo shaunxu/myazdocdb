@@ -5,10 +5,10 @@
         <tr>
             <th>#</th>
             <th>ID</th>
-            <th>Self</th>
+            <th>Resource ID</th>
             <th>Timestamp</th>
             <th>ETag</th>
-            <th>
+            <th colspan="2">
                 <button type="button" class="btn btn-success btn-xs btn-block" data-ng-click="createOrUpdate(undefined)">Create</button>
             </th>
         </tr>
@@ -16,26 +16,29 @@
     <tbody data-ng-repeat="document in documents">
         <tr>
             <td>
-                {{$index + 1}}
-                <span class="glyphicon glyphicon-chevron-up" data-ng-show="document.expanded" data-ng-click="document.expanded = true"></span>
-                <span class="glyphicon glyphicon-chevron-down" data-ng-show="!document.expanded" data-ng-click="document.expanded = false"></span>
+                <a href="javascript:void(0)" data-ng-show="document.expanded === true" data-ng-click="document.expanded = false">
+                    <span class="glyphicon glyphicon-chevron-up"></span>
+                </a>
+                <a href="javascript:void(0)" data-ng-show="document.expanded === false" data-ng-click="document.expanded = true">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
             </td>
             <td>
-                <a data-ui-sref="documents({ dbSelf: database.id })">{{document.id}}</a>
+                {{document.id}}
             </td>
-            <td>{{document._self}}</td>
+            <td>{{document._rid}}</td>
             <td>{{document._ts}}</td>
             <td>{{document._etag}}</td>
             <td>
-                <button type="button" class="btn btn-danger btn-xs btn-block" data-ng-click="createOrUpdate(document)">Edit</button>
-                <button type="button" class="btn btn-danger btn-xs btn-block" data-ng-click="delete(document.id, document._self)">Delete</button>
+                <button type="button" class="btn btn-primary btn-xs btn-block" data-ng-click="createOrUpdate(document)">Edit</button>
+            </td>
+            <td>
+                <button type="button" class="btn btn-danger btn-xs btn-block" data-ng-click="delete(document)">Delete</button>
             </td>
         </tr>
-        <tr data-ng-show="document.expanded">
-            <td colspan="5">
-                <pre>
-                    {{JSON.stringify(document.body, null, 2)}}
-                </pre>
+        <tr data-ng-show="document.expanded === true">
+            <td colspan="7">
+                <pre>{{document.bodyString}}</pre>
             </td>
         </tr>
     </tbody>

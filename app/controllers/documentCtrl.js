@@ -10,26 +10,31 @@
                     $alert(JSON.stringify(error, null, 2));
                 }
                 else {
+                    $scope.documents = [];
                     docs.forEach(function (doc) {
                         var model = {
                             expanded: false,
                             id: doc.id,
                             _self: doc._self,
                             _ts: doc._ts,
-                            _etag: doc._etag
+                            _etag: doc._etag,
+                            _rid: doc._rid,
+                            _attachments: doc._attachments
                         };
-                        delete doc.id;
                         delete doc._self;
                         delete doc._ts;
                         delete doc._etag;
+                        delete doc._rid;
+                        delete doc._attachments;
                         model.body = doc;
+                        model.bodyString = JSON.stringify(doc, null, 2);
                         $scope.documents.push(model);
                     });
                 }
             });
         };
 
-        $scope.delete = function (id, selfLink) {
+        $scope.delete = function (doc) {
             var modalInstance = $modal.open({
                 templateUrl: 'views/document/delete.html',
                 controller: 'DocumentDeleteCtrl',
@@ -38,10 +43,7 @@
                         return $scope.col;
                     },
                     doc: function () {
-                        return {
-                            id: id,
-                            link: selfLink
-                        }
+                        return doc;
                     }
                 }
             });
@@ -86,12 +88,12 @@
         $scope.col = col;
         $scope.isUpdate = $scope.doc && $scope.doc.id;
 
-        $scope.ok = function (id, body) {
+        $scope.ok = function (id, bodyString) {
             // set body and id again in case user didn't put anything
             var doc;
             try
             {
-                doc = JSON.parse(body);
+                doc = JSON.parse(bodyString);
                 doc.id = id;
             }
             catch (ex)
@@ -125,7 +127,7 @@
 
         $scope.ok = function (id) {
             if (id === doc.id) {
-                api.request(controllerName, 'remove', { id: id, collectionLink: col.link }, function (error) {
+                api.request(controllerName, 'remove', { id: id, collectionLink: col.collectionLink }, function (error) {
                     if (error) {
                         $alert(JSON.stringify(error, null, 2));
                     }

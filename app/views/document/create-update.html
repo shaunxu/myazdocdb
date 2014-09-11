@@ -13,11 +13,11 @@
         </div>
         <div class="form-group">
             <label for="documentId">Body (in JSON)</label>
-            <textarea class="form-control" rows="5" id="body" data-ng-model="doc.body"></textarea>
+            <textarea class="form-control" rows="5" id="body" data-ng-model="doc.bodyString"></textarea>
         </div>
     </form>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-primary" data-ng-click="ok(doc.id, doc.body)">{{isUpdate ? 'Update' : 'Create'}}</button>
+    <button type="button" class="btn btn-primary" data-ng-click="ok(doc.id, doc.bodyString)">{{isUpdate ? 'Update' : 'Create'}}</button>
     <button type="button" class="btn btn-default" data-ng-click="cancel()">Cancel</button>
 </div>

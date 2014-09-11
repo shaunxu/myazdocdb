@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <h3 class="modal-title">Delete document in collection '{{col.id}}'</h3>
+    <h3 class="modal-title">Delete document in collection '{{col.collectionId}}'</h3>
 </div>
 <div class="modal-body">
     <div class="panel panel-danger">
@@ -15,9 +15,7 @@
                 <b>Content</b>
             </p>
             <p>
-                <pre>
-                    {{doc}}
-                </pre>
+                <pre>{{doc.bodyString}}</pre>
             </p>
             <p>
                 Please type in the name of the database to confirm.

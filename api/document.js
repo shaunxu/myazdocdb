@@ -21,7 +21,7 @@
         var body = params.body || {};
         var collectionLink = params.collectionLink;
         if (body.id && body.id.length > 0) {
-            _select(client, { id: body.id }, function (error, cols) {
+            _select(client, { id: body.id, collectionLink: collectionLink }, function (error, cols) {
                 if (error) {
                     return callback(error, null);
                 }
@@ -104,7 +104,7 @@
         var body = params.body || {};
         var collectionLink = params.collectionLink;
         if (body.id && body.id.length > 0) {
-            _select(client, { id: body.id }, function (error, docs) {
+            _select(client, { id: body.id, collectionLink: collectionLink }, function (error, docs) {
                 if (error) {
                     return callback(error);
                 }
