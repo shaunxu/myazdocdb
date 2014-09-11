@@ -100,7 +100,7 @@
                     return callback(null);
                 }
                 else {
-                    return callback('Miss database link in request.');
+                    return callback('Miss database link in request: ' + JSON.stringify(params, null, 2));
                 }
             }
         };

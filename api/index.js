@@ -31,9 +31,6 @@
                     if (controller) {
                         if (controller[actionName]) {
                             var params = req.body || {};
-                            if (typeof params === 'string') {
-                                params = JSON.parse(params);
-                            }
                             // perform validate if defined inside controller
                             _validate(controller, params, function (error) {
                                 if (error) {
