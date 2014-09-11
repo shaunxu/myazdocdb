@@ -88,7 +88,8 @@
 
         $scope.ok = function (id, body) {
             // set body and id again in case user didn't put anything
-            body = body || {};
+            console.log(body);
+            body = JSON.parse(body);
             body.id = id;
             $alert(JSON.stringify(body, null, 2));
             api.request(controllerName, $scope.isUpdate ? 'update' : 'create', { body: body, collectionLink: col.collectionLink }, function (error, doc) {
