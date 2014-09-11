@@ -141,7 +141,7 @@
                     return callback(null);
                 }
                 else {
-                    return callback('Miss collection link in request.');
+                    return callback('Miss collection link in request: ' + JSON.stringify(params, null, 2));
                 }
             }
         };
