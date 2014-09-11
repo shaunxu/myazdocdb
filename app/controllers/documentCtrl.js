@@ -84,12 +84,10 @@
     app.controller('DocumentCreateOrUpdateCtrl', function ($scope, $alert, $modalInstance, api, col, doc) {
         $scope.doc = doc || {};
         $scope.col = col;
-        $scope.isUpdate = function () {
-            return $scope.doc && $scope.doc.id;
-        };
+        $scope.isUpdate = $scope.doc && $scope.doc.id;
 
         $scope.ok = function (id, body) {
-            api.request(controllerName, $scope.isUpdate() ? 'update' : 'create', { body: body, collectionLink: col.collectionLink }, function (error, doc) {
+            api.request(controllerName, $scope.isUpdate ? 'update' : 'create', { body: body, collectionLink: col.collectionLink }, function (error, doc) {
                 if (error) {
                     $alert(JSON.stringify(error, null, 2));
                 }
