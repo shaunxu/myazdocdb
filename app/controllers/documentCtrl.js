@@ -102,12 +102,9 @@
                 return;
             }
             // invoke api to create or update document
-            $alert(JSON.stringify(doc, null, 2));
-            $alert(col.collectionLink);
             api.request(controllerName, $scope.isUpdate ? 'update' : 'create', { body: doc, collectionLink: col.collectionLink }, function (error, doc) {
                 if (error) {
                     $alert(error);
-                    //$alert(JSON.stringify(error, null, 2));
                 }
                 else {
                     $modalInstance.close(doc);
