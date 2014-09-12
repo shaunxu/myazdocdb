@@ -49,10 +49,13 @@
                 <img class="center-block" src="styles/loading.gif" />
             </div>
 
-            <ol class="breadcrumb">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Library</a></li>
-                <li class="active">Data</li>
+            <ol class="breadcrumb" data-ng-controller="BreadcrumbCtrl">
+                <li>
+                    <a data-ui-sref="dashboard" href="javascript:void(0)">Home</a>
+                </li>
+                <li data-ng-repeat="item in breadcrumb.items" data-ng-class="item.state ? undefined : 'active'">
+                    <a data-ui-sref="{{item.state}}" data-ng-if="item.state">{{item.text}}</a>{{item.state ? '' : item.text}}
+                </li>
             </ol>
 
             <div data-ui-view></div>
@@ -71,6 +74,7 @@
         <script type="text/javascript" src="/lib/angular-ui/ng-grid-2.0.11.debug.js"></script>
 
         <script type="text/javascript" src="/app.js"></script>
+        <script type="text/javascript" src="/controllers/breadcrumbCtrl.js"></script>
         <script type="text/javascript" src="/controllers/connectionCtrl.js"></script>
         <script type="text/javascript" src="/controllers/dashboardCtrl.js"></script>
         <script type="text/javascript" src="/controllers/consoleCtrl.js"></script>

@@ -3,7 +3,7 @@
 
     var controllerName = 'document';
 
-    app.controller('DocumentIndexCtrl', function ($scope, $stateParams, $alert, $modal, api) {
+    app.controller('DocumentIndexCtrl', function ($rootScope, $scope, $stateParams, $alert, $modal, api) {
         var refresh = function () {
             api.request(controllerName, 'list', { collectionLink: $scope.col.collectionLink }, function (error, docs) {
                 if (error) {
@@ -70,15 +70,25 @@
             }, function () {});
         };
 
-        $scope.validate = function (body) {
-
-        };
-
         $scope.col = {
             databaseId: $stateParams.did,
+            databaseLink: $stateParams.dl,
             collectionId: $stateParams.cid,
             collectionLink: $stateParams.cl
         };
+        $rootScope.breadcrumb.items = [
+            {
+                state: 'database',
+                text: 'Databases'
+            },
+            {
+                state: 'collection({ did: ' + $scope.col.databaseId + ', dl: ' + $scope.col.databaseLink + ' })',
+                text: $scope.col.databaseId
+            },
+            {
+                text: $scope.col.collectionId
+            }
+        ];
 
         refresh();
     });

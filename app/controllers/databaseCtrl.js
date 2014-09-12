@@ -3,7 +3,7 @@
 
     var controllerName = 'database';
 
-    app.controller('DatabaseIndexCtrl', function ($scope, $alert, $modal, api) {
+    app.controller('DatabaseIndexCtrl', function ($rootScope, $scope, $alert, $modal, api) {
         var refresh = function () {
             api.request(controllerName, 'list', null, function (error, dbs) {
                 if (error) {
@@ -42,6 +42,13 @@
                 refresh();
             }, function () {});
         };
+
+        $rootScope.breadcrumb.items = [
+            {
+                state: 'database',
+                text: 'Databases'
+            }
+        ];
 
         refresh();
     });

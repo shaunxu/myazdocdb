@@ -34,11 +34,10 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
     });
 
     $stateProvider.state('document', {
-        url: '/documents/?did&cid&cl',
+        url: '/documents/?did&dl&cid&cl',
         templateUrl: '/views/document/index.html',
         controller: 'DocumentIndexCtrl'
     });
-
 }]);
 
 app.config(function ($httpProvider) {
