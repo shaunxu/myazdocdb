@@ -41,6 +41,36 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
 
 }]);
 
+app.config(function ($httpProvider) {
+    $httpProvider.interceptors.push(function ($q, $rootScope) {
+        return {
+            'request': function (config) {
+                $rootScope.$broadcast('loading-started');
+                return config || $q.when(config);
+            },
+            'response': function(response) {
+                $rootScope.$broadcast('loading-complete');
+                return response || $q.when(response);
+            }
+        };
+    });
+});
+
+app.directive("loadingIndicator", function () {
+    return {
+        restrict : "A",
+        link : function (scope, element) {
+            scope.$on("loading-started", function () {
+                element.css({"display" : ""});
+            });
+
+            scope.$on("loading-complete", function () {
+                element.css({"display" : "none"});
+            });
+        }
+    };
+});
+
 app.value('$', $);
 app.value('$alert', alert);
 

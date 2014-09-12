@@ -47,7 +47,7 @@
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(bodyParser.json());
     // gzip
-    var compression = require('compression')
+    var compression = require('compression');
     app.use(compression());
     // redirect all html requests to `index.html`
     app.use(function (req, res, next) {
