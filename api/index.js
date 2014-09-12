@@ -16,6 +16,24 @@
             }
         };
 
+        var _logAndSendErrorOrResult = function (controllerName, actionName, params, error, result, res) {
+            var message = {
+                controllerName: controllerName,
+                actionName: actionName,
+                params: params,
+            };
+            if (error) {
+                message.error = error;
+                logger.error(message);
+                res.status(500).send(message);
+            }
+            else {
+                message.result = result;
+                logger.debug(message);
+                res.json(message);
+            }
+        };
+
         app.use(function (req, res) {
             var host = req.headers['x-docdb-host'];
             var key = req.headers['x-docdb-key'];
@@ -34,42 +52,37 @@
                             // perform validate if defined inside controller
                             _validate(controller, params, function (error) {
                                 if (error) {
-                                    var message = controllerName + '/' + actionName + ' ...\n' + 'params: ' + JSON.stringify(params, null, 2) + '\n' + 'error: ' + JSON.stringify(error, null, 2);
-                                    logger.error(message);
-                                    res.status(500).send(message);
+                                    _logAndSendErrorOrResult(controllerName, actionName, params, error, null, res);
                                 }
                                 else {
                                     // perform the action
                                     var client = new DocumentDBClient(host, { masterKey: key });
                                     controller[actionName](client, params, function (error, result) {
                                         if (error) {
-                                            var message = controllerName + '/' + actionName + ' ...\n' + 'params: ' + JSON.stringify(params, null, 2) + '\n' + 'error: ' + JSON.stringify(error, null, 2);
-                                            logger.error(message);
-                                            res.status(500).send(message);
+                                            _logAndSendErrorOrResult(controllerName, actionName, params, error, null, res);
                                         }
                                         else {
                                             result = result || {};
-                                            logger.debug(controllerName + '/' + actionName + ' ...\n' + 'params: ' + JSON.stringify(params, null, 2) + '\n' + 'result: ' + JSON.stringify(result, null, 2));
-                                            res.json(result);
+                                            _logAndSendErrorOrResult(controllerName, actionName, params, null, result, res);
                                         }
                                     });
                                 }
                             });
                         }
                         else {
-                            res.status(500).send('Cannot find action [' + actionName + '] in controller [' + controllerName + '] from request path [' + req.path + ']');
+                            _logAndSendErrorOrResult(controllerName, actionName, null, 'Cannot find action [' + actionName + '] in controller [' + controllerName + '] from request path [' + req.path + ']', null, res);
                         }
                     }
                     else {
-                        res.status(500).send('Cannot find controller [' + controllerName + '] from request path [' + req.path + ']');
+                        _logAndSendErrorOrResult(controllerName, null, null, 'Cannot find controller [' + controllerName + '] from request path [' + req.path + ']', null, res);
                     }
                 }
                 else {
-                    res.status(500).send('Invalid api request [' + req.path + ']');
+                    _logAndSendErrorOrResult(null, null, null, 'Invalid api request [' + req.path + ']', null, res);
                 }
             }
             else {
-                res.status(500).send('Miss host or key.');
+                _logAndSendErrorOrResult(null, null, null, 'Miss host or key.', null, res);
             }
         });
     };
