@@ -82,7 +82,7 @@
                 text: 'Databases'
             },
             {
-                state: $state.href('collection', { did: $scope.col.databaseId, dl: $scope.col.databaseLink}),
+                href: $state.href('collection', { did: $scope.col.databaseId, dl: $scope.col.databaseLink}),
                 text: $scope.col.databaseId
             },
             {
