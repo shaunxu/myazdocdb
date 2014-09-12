@@ -30,7 +30,7 @@
             else {
                 message.result = result;
                 logger.debug(message);
-                res.json(message);
+                res.json(result);
             }
         };
 

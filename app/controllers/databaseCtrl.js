@@ -3,7 +3,7 @@
 
     var controllerName = 'database';
 
-    app.controller('DatabaseIndexCtrl', function ($rootScope, $scope, $alert, $modal, api) {
+    app.controller('DatabaseIndexCtrl', function ($rootScope, $state, $scope, $alert, $modal, api) {
         var refresh = function () {
             api.request(controllerName, 'list', null, function (error, dbs) {
                 if (error) {
@@ -45,6 +45,7 @@
 
         $rootScope.breadcrumb.items = [
             {
+                href: $state.href('database', undefined, undefined),
                 text: 'Databases'
             }
         ];
