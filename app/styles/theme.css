@@ -16,3 +16,10 @@ body {
 .theme-showcase .navbar .container {
     width: auto;
 }
+
+.loading-indicator {
+    position: absolute;
+    margin-left: 36%;
+    margin-top:100px;
+    z-index: 1000;
+}
