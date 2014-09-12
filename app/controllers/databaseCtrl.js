@@ -45,7 +45,6 @@
 
         $rootScope.breadcrumb.items = [
             {
-                state: 'database',
                 text: 'Databases'
             }
         ];

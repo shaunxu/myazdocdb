@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    app.controller('ConsoleCtrl', function ($scope, $alert, api) {
+    app.controller('ConsoleCtrl', function ($rootScope, $scope, $alert, api) {
         $scope.options = {
             databases: {
                 operation: 'queryDatabases',
@@ -24,6 +24,12 @@
             operation: '',
             link: ''
         };
+
+        $rootScope.breadcrumb.items = [
+            {
+                text: 'Console'
+            }
+        ];
 
         // retrieve all databases and collections' self link
         // and push them into $scope.options for selection

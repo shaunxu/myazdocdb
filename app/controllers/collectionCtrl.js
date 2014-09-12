@@ -3,7 +3,7 @@
 
     var controllerName = 'collection';
 
-    app.controller('CollectionIndexCtrl', function ($rootScope, $scope, $stateParams, $alert, $modal, api) {
+    app.controller('CollectionIndexCtrl', function ($rootScope, $scope, $state, $stateParams, $alert, $modal, api) {
         var refresh = function () {
             api.request(controllerName, 'list', { databaseLink: $scope.db.link }, function (error, cols) {
                 if (error) {
@@ -57,7 +57,7 @@
         };
         $rootScope.breadcrumb.items = [
             {
-                state: 'database',
+                href: $state.href('database', undefined, undefined),
                 text: 'Databases'
             },
             {
