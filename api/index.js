@@ -82,7 +82,7 @@
                 }
             }
             else {
-                _logAndSendErrorOrResult(null, null, null, 'Miss host or key.', null, res);
+                _logAndSendErrorOrResult(null, null, null, 'Miss host or key in request [' + req.path + ']', null, res);
             }
         });
     };

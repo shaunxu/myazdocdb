@@ -93,10 +93,24 @@
         refresh();
     });
 
-    app.controller('DocumentCreateOrUpdateCtrl', function ($scope, $alert, $modalInstance, api, col, doc) {
+    app.controller('DocumentCreateOrUpdateCtrl', function ($scope, $, $alert, $modalInstance, api, col, doc) {
         $scope.doc = doc || {};
         $scope.col = col;
         $scope.isUpdate = $scope.doc && $scope.doc.id;
+
+        $scope.designMode = true;
+        var element = $('#jsoneditor')[0];
+        var editor = new JSONEditor(element);
+
+        $scope.changeMode = function (isDeignMode) {
+            $scope.designMode = isDeignMode;
+            if (isDeignMode === true) {
+                editor.set(JSON.parse($scope.bodyString));
+            }
+            else {
+                $scope.bodyString = JSON.stringify(editor.get(), null, 2);
+            }
+        };
 
         $scope.ok = function (id, bodyString) {
             // set body and id again in case user didn't put anything

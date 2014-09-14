@@ -12,8 +12,16 @@
             <input type="text" class="form-control" id="documentLink" placeholder="ID" data-ng-model="doc._self" readonly>
         </div>
         <div class="form-group">
-            <label for="documentId">Body (in JSON)</label>
-            <textarea class="form-control" rows="5" id="body" data-ng-model="doc.bodyString"></textarea>
+            <ul class="nav nav-pills">
+                <li data-ng-class="designMode ? 'active' : undefined" data-ng-click="changeMode(true)">
+                    <a href="javascript:void(0)">Designer</a>
+                </li>
+                <li data-ng-class="designMode ? undefined : 'active'" data-ng-click="changeMode(false)">
+                    <a href="javascript:void(0)">Raw</a>
+                </li>
+            </ul>
+            <div id="jsoneditor" data-ng-show="designMode"></div>
+            <textarea class="form-control" rows="5" data-ng-show="!designMode" data-ng-model="doc.bodyString"></textarea>
         </div>
     </form>
 </div>
