@@ -98,9 +98,28 @@
         $scope.col = col;
         $scope.isUpdate = $scope.doc && $scope.doc.id;
 
-        $scope.designMode = true;
+        // TODO: remove the fake part when we can initialize JSONEditor successfully
+        $scope.designMode = false;
         var element = $('#jsoneditor')[0];
-        var editor = new JSONEditor(element);
+        var editor = {};
+        if (element) {
+            editor = new JSONEditor(element);
+        }
+        else {
+            editor = {
+                get: function () {
+                    try {
+                        return JSON.parse($scope.bodyString);
+                    }
+                    catch (ex) {
+                        return;
+                    }
+                },
+                set: function (json) {
+                    $scope.bodyString = JSON.stringify(json, null, 2);
+                }
+            };
+        }
 
         $scope.changeMode = function (isDeignMode) {
             $scope.designMode = isDeignMode;
