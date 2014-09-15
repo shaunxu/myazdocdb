@@ -23,8 +23,3 @@ body {
     margin-top:100px;
     z-index: 1000;
 }
-.breadcrumb > li + li:before {
-    padding: 0 5px;
-    color: #ccc;
-    content: "<span class="glyphicon glyphicon-chevron-right"></span>";
-}
