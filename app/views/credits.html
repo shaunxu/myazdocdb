@@ -11,8 +11,8 @@
                 <th>#</th>
                 <th>Name</th>
                 <th>Description</th>
-                <th>Link</th>
-                <th>License</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
             </tr>
             </thead>
             <tbody>
@@ -21,10 +21,10 @@
                 <td>{{credit.title}}</td>
                 <td>{{credit.description}}</td>
                 <td>
-                    <a data-ng-href="credit.link" class="btn btn-default btn-sm" role="button">Link</a>
+                    <a data-ng-href="{{credit.link}}" class="btn btn-default btn-sm" role="button">Link</a>
                 </td>
                 <td>
-                    <a data-ng-href="credit.license" class="btn btn-default btn-sm" role="button">License</a>
+                    <a data-ng-href="{{credit.license}}" class="btn btn-default btn-sm" role="button">License</a>
                 </td>
             </tr>
             </tbody>
