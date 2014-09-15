@@ -24,15 +24,20 @@
                     </a>
                 </div>
                 <div class="navbar-collapse collapse"  data-ng-controller="ConnectionCtrl">
-                    <ul class="nav navbar-nav" data-ng-show="isConnected">
-                        <li>
+                    <ul class="nav navbar-nav">
+                        <li data-ng-if="isConnected">
                             <a data-ui-sref="database">Explorer</a>
                         </li>
-                        <li>
+                        <li data-ng-if="isConnected">
                             <a data-ui-sref="console">Console</a>
                         </li>
                         <li>
                             <a data-ui-sref="credits">Credits</a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/shaunxu/myazdocdb" target="_blank">
+                                <img src="https://github.com/favicon.ico" width="16" height="16"/>Source Code
+                            </a>
                         </li>
                     </ul>
                     <form class="navbar-form navbar-right" role="form">
