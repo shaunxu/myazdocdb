@@ -26,11 +26,6 @@
             $scope.disconnect = disconnect;
         };
 
-        // TODO: test purpose, remove them when release
-        credentials.set(
-            'https://shx.documents.azure.com:443/',
-            'uQ/c0mhNedWn28DghOLrqlmkcGT8juUoOuIGGViEwJe0/oQX9xLk+zLHlKRd85KTJOFn+1/ZwfXhF+eLPE9kiw==');
-
         refresh();
     });
 })();
