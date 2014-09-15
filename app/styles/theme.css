@@ -26,5 +26,5 @@ body {
 .breadcrumb > li + li:before {
     padding: 0 5px;
     color: #ccc;
-    content: ">";
+    content: "<span class="glyphicon glyphicon-chevron-right"></span>";
 }
