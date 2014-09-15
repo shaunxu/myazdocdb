@@ -21,6 +21,12 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
         controller: 'ConsoleCtrl'
     });
 
+    $stateProvider.state('credits', {
+        url: '/credits',
+        templateUrl: '/views/credits.html',
+        controller: 'CreditsCtrl'
+    });
+
     $stateProvider.state('database', {
         url: '/databases',
         templateUrl: '/views/database/index.html',

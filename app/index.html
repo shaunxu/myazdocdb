@@ -25,8 +25,15 @@
                 </div>
                 <div class="navbar-collapse collapse"  data-ng-controller="ConnectionCtrl">
                     <ul class="nav navbar-nav" data-ng-show="isConnected">
-                        <li><a data-ui-sref="database">Explorer</a></li>
-                        <li><a data-ui-sref="console">Console</a></li>
+                        <li>
+                            <a data-ui-sref="database">Explorer</a>
+                        </li>
+                        <li>
+                            <a data-ui-sref="console">Console</a>
+                        </li>
+                        <li>
+                            <a data-ui-sref="credits">Credits</a>
+                        </li>
                     </ul>
                     <form class="navbar-form navbar-right" role="form">
                         <div class="form-group" data-ng-show="!isConnected">
@@ -80,6 +87,7 @@
         <script type="text/javascript" src="controllers/connectionCtrl.js"></script>
         <script type="text/javascript" src="controllers/dashboardCtrl.js"></script>
         <script type="text/javascript" src="controllers/consoleCtrl.js"></script>
+        <script type="text/javascript" src="controllers/creditsCtrl.js"></script>
         <script type="text/javascript" src="controllers/databaseCtrl.js"></script>
         <script type="text/javascript" src="controllers/collectionCtrl.js"></script>
         <script type="text/javascript" src="controllers/documentCtrl.js"></script>
