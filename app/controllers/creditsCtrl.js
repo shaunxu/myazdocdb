@@ -1,7 +1,13 @@
 (function () {
     'use strict';
 
-    app.controller('CreditsCtrl', function ($scope) {
+    app.controller('CreditsCtrl', function ($scope, $rootScope) {
+        $rootScope.breadcrumb.items = [
+            {
+                text: 'Credits'
+            }
+        ];
+
         $scope.credits = [];
 
         $scope.credits.push({
