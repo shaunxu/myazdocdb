@@ -176,6 +176,10 @@
                 var container = elem[0];
                 var opts = {
                     name: 'document',
+                    modes: [
+                        'tree',
+                        'text'
+                    ],
                     change: function () {
                         if (scope.editor) {
                             scope.$apply(function () {
