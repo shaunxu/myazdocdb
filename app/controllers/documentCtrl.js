@@ -103,16 +103,15 @@
         $scope.changeMode = function (isDeignMode) {
             $scope.designMode = isDeignMode;
             if (isDeignMode === true) {
-                $scope.doc = JSON.parse($scope.raw);
+                $scope.doc.body = JSON.parse($scope.doc.bodyString);
             }
             else {
-                $scope.raw = JSON.stringify($scope.doc, null, 2);
+                $scope.doc.bodyString = JSON.stringify($scope.doc.body, null, 2);
             }
         };
 
         $scope.ok = function (id, doc, raw, designMode) {
             // set body and id again in case user didn't put anything
-            var doc;
             try
             {
                 if (designMode === false) {

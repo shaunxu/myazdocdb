@@ -14,16 +14,16 @@
         <div class="form-group">
             <tabset>
                 <tab heading="Designer" select="changeMode(true)">
-                    <div md-json-editor data-ng-model="doc"></div>
+                    <div md-json-editor data-ng-model="doc.body"></div>
                 </tab>
                 <tab heading="Raw" select="changeMode(false)">
-                    <textarea class="form-control" rows="10" data-ng-model="raw"></textarea>
+                    <textarea class="form-control" rows="10" data-ng-model="doc.bodyString"></textarea>
                 </tab>
             </tabset>
         </div>
     </form>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-primary" data-ng-click="ok(doc.id, doc, raw, designMode)">{{isUpdate ? 'Update' : 'Create'}}</button>
+    <button type="button" class="btn btn-primary" data-ng-click="ok(doc.id, doc.body, doc.bodyString, designMode)">{{isUpdate ? 'Update' : 'Create'}}</button>
     <button type="button" class="btn btn-default" data-ng-click="cancel()">Cancel</button>
 </div>
