@@ -110,20 +110,9 @@
             }
         };
 
-        $scope.ok = function (id, doc, raw, designMode) {
+        $scope.ok = function (id, doc) {
             // set body and id again in case user didn't put anything
-            try
-            {
-                if (designMode === false) {
-                    doc = JSON.parse(raw);
-                }
-                doc.id = id;
-            }
-            catch (ex)
-            {
-                $alert('Failed to parse document body with error \n' + ex);
-                return;
-            }
+            doc.id = id;
             // invoke api to create or update document
             api.request(controllerName, $scope.isUpdate ? 'update' : 'create', { body: doc, collectionLink: col.collectionLink }, function (error, doc) {
                 if (error) {
