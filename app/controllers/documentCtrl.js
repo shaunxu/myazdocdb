@@ -95,48 +95,29 @@
 
     app.controller('DocumentCreateOrUpdateCtrl', function ($scope, $, $alert, $modalInstance, api, col, doc) {
         $scope.doc = doc || {};
+        $scope.raw = JSON.stringify($scope.doc, null, 2);
         $scope.col = col;
         $scope.isUpdate = $scope.doc && $scope.doc.id;
 
-        // TODO: remove the fake part when we can initialize JSONEditor successfully
-        $scope.designMode = false;
-        var element = $('#jsoneditor')[0];
-        var editor = {};
-        if (element) {
-            editor = new JSONEditor(element);
-        }
-        else {
-            editor = {
-                get: function () {
-                    try {
-                        return JSON.parse($scope.bodyString);
-                    }
-                    catch (ex) {
-                        return;
-                    }
-                },
-                set: function (json) {
-                    $scope.bodyString = JSON.stringify(json, null, 2);
-                }
-            };
-        }
-
+        $scope.designMode = true;
         $scope.changeMode = function (isDeignMode) {
             $scope.designMode = isDeignMode;
             if (isDeignMode === true) {
-                editor.set(JSON.parse($scope.bodyString));
+                $scope.doc = JSON.parse($scope.raw);
             }
             else {
-                $scope.bodyString = JSON.stringify(editor.get(), null, 2);
+                $scope.raw = JSON.stringify($scope.doc, null, 2);
             }
         };
 
-        $scope.ok = function (id, bodyString) {
+        $scope.ok = function (id, doc, raw, designMode) {
             // set body and id again in case user didn't put anything
             var doc;
             try
             {
-                doc = JSON.parse(bodyString);
+                if (designMode === false) {
+                    doc = JSON.parse(raw);
+                }
                 doc.id = id;
             }
             catch (ex)
@@ -183,6 +164,29 @@
 
         $scope.cancel = function () {
             $modalInstance.dismiss('cancel');
+        };
+    });
+
+    app.directive('mdJsonEditor', function () {
+        return {
+            restrict: 'A',
+            scope: {
+                json: '=ngModel'
+            },
+            link: function (scope, elem) {
+                var container = elem[0];
+                var opts = {
+                    name: 'document',
+                    change: function () {
+                        if (scope.editor) {
+                            scope.$apply(function () {
+                                scope.json = scope.editor.get();
+                            });
+                        }
+                    }
+                };
+                scope.editor = new JSONEditor(container, opts, scope.json || {});
+            }
         };
     });
 })();
