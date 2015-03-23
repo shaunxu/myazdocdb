@@ -53,6 +53,8 @@
             }, function () {});
         };
 
+        alert($routeParams);
+
         $scope.db = {
             id: $routeParams.did,
             link: $routeParams.dl
