@@ -1,0 +1,43 @@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>ID</th>
+            <th>Resource ID</th>
+            <th>Timestamp</th>
+            <th>ETag</th>
+            <th colspan="2">
+                <button type="button" class="btn btn-success btn-xs btn-block" data-ng-click="createOrUpdate(undefined)">Create</button>
+            </th>
+        </tr>
+    </thead>
+    <tbody data-ng-repeat="document in documents">
+        <tr>
+            <td>
+                <a href="javascript:void(0)" data-ng-show="document.expanded === true" data-ng-click="document.expanded = false">
+                    <span class="glyphicon glyphicon-chevron-up"></span>
+                </a>
+                <a href="javascript:void(0)" data-ng-show="document.expanded === false" data-ng-click="document.expanded = true">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </td>
+            <td>
+                {{document.id}}
+            </td>
+            <td>{{document._rid}}</td>
+            <td>{{document._ts}}</td>
+            <td>{{document._etag}}</td>
+            <td>
+                <button type="button" class="btn btn-primary btn-xs btn-block" data-ng-click="createOrUpdate(document)">Edit</button>
+            </td>
+            <td>
+                <button type="button" class="btn btn-danger btn-xs btn-block" data-ng-click="delete(document)">Delete</button>
+            </td>
+        </tr>
+        <tr data-ng-show="document.expanded === true">
+            <td colspan="7">
+                <pre>{{document.bodyString}}</pre>
+            </td>
+        </tr>
+    </tbody>
+</table>

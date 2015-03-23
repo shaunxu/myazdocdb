@@ -2,6 +2,7 @@
 <html data-ng-app="MyDocDB">
     <head lang="en">
         <meta charset="UTF-8">
+        <base href="/">
         <title>My DocumentDB</title>
 
         <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css" />
@@ -26,13 +27,13 @@
                 <div class="navbar-collapse collapse"  data-ng-controller="ConnectionCtrl">
                     <ul class="nav navbar-nav">
                         <li data-ng-if="isConnected">
-                            <a data-ui-sref="database">Explorer</a>
+                            <a router-link="database">Explorer</a>
                         </li>
                         <li data-ng-if="isConnected">
-                            <a data-ui-sref="console">Console</a>
+                            <a router-link="console">Console</a>
                         </li>
                         <li>
-                            <a data-ui-sref="credits">Credits</a>
+                            <a router-link="credits">Credits</a>
                         </li>
                         <li>
                             <a href="https://github.com/shaunxu/myazdocdb" target="_blank">Source Code</a>
@@ -65,14 +66,14 @@
 
             <ol class="breadcrumb" data-ng-controller="BreadcrumbCtrl">
                 <li>
-                    <a data-ui-sref="dashboard" href="javascript:void(0)">Home</a>
+                    <a router-link="dashboard" href="javascript:void(0)">Home</a>
                 </li>
                 <li data-ng-repeat="item in breadcrumb.items" data-ng-class="item.href ? undefined : 'active'">
                     <a data-ng-href="{{item.href}}" data-ng-if="item.href">{{item.text}}</a>{{item.href ? '' : item.text}}
                 </li>
             </ol>
 
-            <div data-ui-view></div>
+            <div router-view-port></div>
 
             <footer>
                 <p>&copy; 2014 Shaun Xu - Version: rel_1.0.0.20140917</p>
@@ -83,7 +84,7 @@
         <script type="text/javascript" src="lib/jquery/jquery-ui.js"></script>
         <script type="text/javascript" src="lib/bootstrap/scripts/bootstrap.js"></script>
         <script type="text/javascript" src="lib/angular/angular.js"></script>
-        <script type="text/javascript" src="lib/angular-ui/angular-ui-router.js"></script>
+        <script type="text/javascript" src="lib/angular-new-router/router.es5.js"></script>
         <script type="text/javascript" src="lib/angular-ui/ui-bootstrap-tpls-0.10.0.js"></script>
         <script type="text/javascript" src="lib/angular-ui/ng-grid-2.0.11.debug.js"></script>
         <script type="text/javascript" src="lib/jsoneditor/jsoneditor.js"></script>

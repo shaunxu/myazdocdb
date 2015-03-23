@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    app.controller('ConnectionCtrl', function ($scope, $state, $alert, credentials) {
+    app.controller('ConnectionCtrl', function ($scope, $router, $alert, credentials) {
         var connect = function () {
             credentials.set($scope.host, $scope.key);
             if (credentials.isConnected() === true) {
@@ -15,7 +15,7 @@
         var disconnect = function () {
             credentials.reset();
             refresh();
-            $state.go('dashboard', undefined, undefined);
+            $router.navigate('/dashboard');
         };
 
         var refresh = function () {

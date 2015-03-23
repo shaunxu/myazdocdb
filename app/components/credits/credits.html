@@ -1,0 +1,33 @@
+<div class="jumbotron">
+    <div class="container">
+        <h1>3rd Party Credits & Licenses</h1>
+        <p>
+            "My DocumentDB" uses a number of third party open source components. Their details, copyrights and licenses are below.
+        </p>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-ng-repeat="credit in credits">
+                <td>{{$index + 1}}</td>
+                <td>{{credit.title}}</td>
+                <td>{{credit.description}}</td>
+                <td>
+                    <a data-ng-href="{{credit.link}}" class="btn btn-default btn-sm" role="button">Link</a>
+                </td>
+                <td>
+                    <a data-ng-href="{{credit.license}}" class="btn btn-default btn-sm" role="button">License</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

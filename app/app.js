@@ -1,50 +1,84 @@
 'use strict';
 
 var app = angular.module('MyDocDB', [
-    'ui.router',
+    'ngNewRouter',
     'ui.bootstrap',
     'ngGrid'
 ]);
-
-app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('/');
-
-    $stateProvider.state('dashboard', {
-        url: '/',
-        templateUrl: '/views/dashboard.html',
-        controller: 'DashboardCtrl'
-    });
-
-    $stateProvider.state('console', {
-        url: '/console',
-        templateUrl: '/views/console.html',
-        controller: 'ConsoleCtrl'
-    });
-
-    $stateProvider.state('credits', {
-        url: '/credits',
-        templateUrl: '/views/credits.html',
-        controller: 'CreditsCtrl'
-    });
-
-    $stateProvider.state('database', {
-        url: '/databases',
-        templateUrl: '/views/database/index.html',
-        controller: 'DatabaseIndexCtrl'
-    });
-
-    $stateProvider.state('collection', {
-        url: '/collections/?did&dl',
-        templateUrl: '/views/collection/index.html',
-        controller: 'CollectionIndexCtrl'
-    });
-
-    $stateProvider.state('document', {
-        url: '/documents/?did&dl&cid&cl',
-        templateUrl: '/views/document/index.html',
-        controller: 'DocumentIndexCtrl'
+app.config(['$componentLoaderProvider', function ($componentLoaderProvider) {
+    $componentLoaderProvider.setCtrlNameMapping(function (name) {
+        return name[0].toUpperCase() + name.substr(1) + 'Ctrl';
     });
 }]);
+
+app.run(['$router', function ($router) {
+    $router.config([
+        {
+            path: '/',
+            component: 'dashboard'
+        },
+        {
+            path: '/console',
+            component: 'console'
+        },
+        {
+            path: '/credits',
+            component: 'credits'
+        },
+        {
+            path: '/database',
+            component: 'database'
+        },
+        {
+            path: '/collections/?did&dl',
+            component: 'collection'
+        },
+        {
+            path: '/documents/?did&dl&cid&cl',
+            component: 'document'
+        }
+    ]);
+}]);
+
+//app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+//    $urlRouterProvider.otherwise('/');
+//
+//    $stateProvider.state('dashboard', {
+//        url: '/',
+//        templateUrl: '/views/dashboard.html',
+//        controller: 'DashboardCtrl'
+//    });
+//
+//    $stateProvider.state('console', {
+//        url: '/console',
+//        templateUrl: '/views/console.html',
+//        controller: 'ConsoleCtrl'
+//    });
+//
+//    $stateProvider.state('credits', {
+//        url: '/credits',
+//        templateUrl: '/views/credits.html',
+//        controller: 'CreditsCtrl'
+//    });
+//
+//    $stateProvider.state('database', {
+//        url: '/databases',
+//        templateUrl: '/views/database/index.html',
+//        controller: 'DatabaseIndexCtrl'
+//    });
+//
+//    $stateProvider.state('collection', {
+//        url: '/collections/?did&dl',
+//        templateUrl: '/views/collection/index.html',
+//        controller: 'CollectionIndexCtrl'
+//    });
+//
+//    $stateProvider.state('document', {
+//        url: '/documents/?did&dl&cid&cl',
+//        templateUrl: '/views/document/index.html',
+//        controller: 'DocumentIndexCtrl'
+//    });
+//}]);
 
 app.config(function ($httpProvider) {
     $httpProvider.interceptors.push(function ($q, $rootScope) {
