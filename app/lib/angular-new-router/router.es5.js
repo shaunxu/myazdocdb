@@ -74,7 +74,7 @@ function routerFactory($$rootRouter, $rootScope, $location, $$grammar, $controll
     });
 
     $rootScope.$watch(function () {
-        return $location.path();
+        return $location.url();
     }, function (newUrl) {
         $$rootRouter.navigate(newUrl);
     });
@@ -83,7 +83,7 @@ function routerFactory($$rootRouter, $rootScope, $location, $$grammar, $controll
     $$rootRouter.navigate = function (url) {
         return nav.call(this, url).then(function (newUrl) {
             if (newUrl) {
-                $location.path(newUrl);
+                $location.url(newUrl);
             }
         });
     }

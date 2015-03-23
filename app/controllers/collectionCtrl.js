@@ -8,14 +8,16 @@
         console.log('CollectionCtrl');
 
         var refresh = function () {
-            api.request(controllerName, 'list', { databaseLink: $scope.db.link }, function (error, cols) {
-                if (error) {
-                    $alert(JSON.stringify(error, null, 2));
-                }
-                else {
-                    $scope.items = cols;
-                }
-            });
+            if ($scope.db.link) {
+                api.request(controllerName, 'list', { databaseLink: $scope.db.link }, function (error, cols) {
+                    if (error) {
+                        $alert(JSON.stringify(error, null, 2));
+                    }
+                    else {
+                        $scope.items = cols;
+                    }
+                });
+            }
         };
 
         $scope.delete = function (id, selfLink) {
