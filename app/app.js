@@ -119,8 +119,8 @@ app.value('$alert', alert);
 
 app.factory('credentials', function () {
     return {
-        host: '',
-        key: '',
+        host: 'https://shx.documents.azure.com:443/',
+        key: '6kBD2nZO+LUfXS95TAt/5B6Ih2otbriWF3fKR6RkqevqgPuy3MeUIYZlQw/7z54PP/Va1kH90lxVCxoZ6muhtQ==',
         set: function (host, key) {
             this.host = host;
             this.key = key;
