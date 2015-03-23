@@ -4,6 +4,8 @@
     var controllerName = 'database';
 
     app.controller('DatabaseCtrl', function ($rootScope, $router, $alert, $modal, api) {
+        this.databases = [];
+        
         var refresh = function () {
             api.request(controllerName, 'list', null, function (error, dbs) {
                 if (error) {
