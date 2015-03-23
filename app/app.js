@@ -30,11 +30,13 @@ app.run(['$router', function ($router) {
             component: 'database'
         },
         {
-            path: '/collections/?did&dl',
+            //path: '/collections/?did&dl',
+            path: '/collections',
             component: 'collection'
         },
         {
-            path: '/documents/?did&dl&cid&cl',
+            //path: '/documents/?did&dl&cid&cl',
+            path: '/documents',
             component: 'document'
         },
         {
