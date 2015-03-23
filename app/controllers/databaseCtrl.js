@@ -3,19 +3,19 @@
 
     var controllerName = 'database';
 
-    app.controller('DatabaseIndexCtrl', function ($rootScope, $router, $scope, $alert, $modal, api) {
+    app.controller('DatabaseIndexCtrl', function ($rootScope, $router, $alert, $modal, api) {
         var refresh = function () {
             api.request(controllerName, 'list', null, function (error, dbs) {
                 if (error) {
                     $alert(JSON.stringify(error, null, 2));
                 }
                 else {
-                    $scope.databases = dbs;
+                    this.databases = dbs;
                 }
             });
         };
 
-        $scope.delete = function (id, selfLink) {
+        this.delete = function (id, selfLink) {
             var modalInstance = $modal.open({
                 templateUrl: 'views/database/delete.html',
                 controller: 'DatabaseDeleteCtrl',
@@ -33,7 +33,7 @@
             }, function () {});
         };
 
-        $scope.create = function () {
+        this.create = function () {
             var modalInstance = $modal.open({
                 templateUrl: 'views/database/create.html',
                 controller: 'DatabaseCreateCtrl'

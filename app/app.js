@@ -2,9 +2,9 @@
 
 var app = angular.module('MyDocDB', [
     'ngNewRouter',
-    'ui.bootstrap',
-    'ngGrid'
+    'ui.bootstrap'
 ]);
+
 app.config(['$componentLoaderProvider', function ($componentLoaderProvider) {
     $componentLoaderProvider.setCtrlNameMapping(function (name) {
         return name[0].toUpperCase() + name.substr(1) + 'Ctrl';
@@ -14,7 +14,7 @@ app.config(['$componentLoaderProvider', function ($componentLoaderProvider) {
 app.run(['$router', function ($router) {
     $router.config([
         {
-            path: '/',
+            path: '/dashboard',
             component: 'dashboard'
         },
         {
@@ -36,6 +36,10 @@ app.run(['$router', function ($router) {
         {
             path: '/documents/?did&dl&cid&cl',
             component: 'document'
+        },
+        {
+            path: '/',
+            redirectTo: '/dashboard'
         }
     ]);
 }]);

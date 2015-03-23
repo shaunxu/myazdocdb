@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-ng-app="MyDocDB">
+<html>
     <head lang="en">
         <meta charset="UTF-8">
         <base href="/">
@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="styles/theme.css" />
         <link rel="stylesheet" href="lib/jsoneditor/jsoneditor.css" />
     </head>
-    <body>
+    <body ng-app="MyDocDB">
         <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <div class="container">
                 <div class="navbar-header">
@@ -27,13 +27,13 @@
                 <div class="navbar-collapse collapse"  data-ng-controller="ConnectionCtrl">
                     <ul class="nav navbar-nav">
                         <li data-ng-if="isConnected">
-                            <a router-link="database">Explorer</a>
+                            <a ng-link="database">Explorer</a>
                         </li>
                         <li data-ng-if="isConnected">
-                            <a router-link="console">Console</a>
+                            <a ng-link="console">Console</a>
                         </li>
                         <li>
-                            <a router-link="credits">Credits</a>
+                            <a ng-link="credits">Credits</a>
                         </li>
                         <li>
                             <a href="https://github.com/shaunxu/myazdocdb" target="_blank">Source Code</a>
@@ -66,14 +66,14 @@
 
             <ol class="breadcrumb" data-ng-controller="BreadcrumbCtrl">
                 <li>
-                    <a router-link="dashboard" href="javascript:void(0)">Home</a>
+                    <a ng-link="dashboard" href="javascript:void(0)">Home</a>
                 </li>
                 <li data-ng-repeat="item in breadcrumb.items" data-ng-class="item.href ? undefined : 'active'">
                     <a data-ng-href="{{item.href}}" data-ng-if="item.href">{{item.text}}</a>{{item.href ? '' : item.text}}
                 </li>
             </ol>
 
-            <div router-view-port></div>
+            <div ng-viewport></div>
 
             <footer>
                 <p>&copy; 2014 Shaun Xu - Version: rel_1.0.0.20140917</p>

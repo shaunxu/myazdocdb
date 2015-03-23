@@ -16,7 +16,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr data-ng-repeat="credit in credits">
+            <tr data-ng-repeat="credit in credits.items">
                 <td>{{$index + 1}}</td>
                 <td>{{credit.title}}</td>
                 <td>{{credit.description}}</td>
@@ -29,5 +29,6 @@
             </tr>
             </tbody>
         </table>
+
     </div>
 </div>

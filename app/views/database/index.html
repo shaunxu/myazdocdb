@@ -15,7 +15,7 @@
         <tr data-ng-repeat="database in databases">
             <td>{{$index + 1}}</td>
             <td>
-                <a router-link="collection({ did: database.id, dl: database._self })">{{database.id}}</a>
+                <a ng-link="collection({ did: database.id, dl: database._self })">{{database.id}}</a>
             </td>
             <td>{{database._self}}</td>
             <td>{{database._ts}}</td>
