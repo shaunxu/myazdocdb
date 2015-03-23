@@ -7,12 +7,6 @@
         var $scope = this;
 
         var refresh = function () {
-            var query = $location.search();
-            $scope.db = {
-                id: query.did,
-                link: query.dl
-            };
-
             api.request(controllerName, 'list', { databaseLink: $scope.db.link }, function (error, cols) {
                 if (error) {
                     $alert(JSON.stringify(error, null, 2));
@@ -57,6 +51,12 @@
             modalInstance.result.then(function () {
                 refresh();
             }, function () {});
+        };
+
+        var query = $location.search();
+        $scope.db = {
+            id: query.did,
+            link: query.dl
         };
 
         $rootScope.breadcrumb.items = [
