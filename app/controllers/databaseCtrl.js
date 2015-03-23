@@ -3,7 +3,7 @@
 
     var controllerName = 'database';
 
-    app.controller('DatabaseIndexCtrl', function ($rootScope/*, $router, $alert, $modal, api*/) {
+    app.controller('DatabaseCtrl', function ($rootScope/*, $router, $alert, $modal, api*/) {
         var refresh = function () {
             //api.request(controllerName, 'list', null, function (error, dbs) {
             //    if (error) {

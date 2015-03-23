@@ -336,8 +336,10 @@ function pipelineFactory($controller, $componentLoader, $templateRequest) {
             try {
                 ctrl = $controller(controllerName, locals);
             } catch (e) {
-                alert(e);
-                console.warn && console.warn('Could not instantiate controller', controllerName);
+                console.warn && (function (__e, __cn) {
+                    console.warn('Could not instantiate controller', __cn);
+                    console.warn(__e);
+                })(e, controllerName);
                 ctrl = $controller(angular.noop, locals);
             }
             return ctrl;
