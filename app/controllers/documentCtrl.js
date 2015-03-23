@@ -5,10 +5,10 @@
 
     app.controller('DocumentCtrl', function ($rootScope, $router, $location, $alert, $modal, api) {
         var $scope = this;
+        console.log('DocumentCtrl');
 
         var refresh = function () {
             if ($scope.col.collectionLink) {
-                console.log($scope.col.collectionLink);
                 api.request(controllerName, 'list', { collectionLink: $scope.col.collectionLink }, function (error, docs) {
                     if (error) {
                         $alert(JSON.stringify(error, null, 2));
@@ -78,7 +78,6 @@
         };
 
         var query = $location.search();
-        console.log(query);
         $scope.col = {
             databaseId: decodeURIComponent(query.did),
             databaseLink: decodeURIComponent(query.dl),
