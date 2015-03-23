@@ -31,7 +31,7 @@ app.run(['$router', function ($router) {
         },
         {
             //path: '/collections/?did&dl',
-            path: '/collections/',
+            path: '/collections/:did/:dl',
             component: 'collection'
         },
         {
