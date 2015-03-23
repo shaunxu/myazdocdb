@@ -31,12 +31,12 @@ app.run(['$router', function ($router) {
         },
         {
             //path: '/collections/?did&dl',
-            path: '/collections',
+            path: '/collections/',
             component: 'collection'
         },
         {
             //path: '/documents/?did&dl&cid&cl',
-            path: '/documents',
+            path: '/documents/',
             component: 'document'
         },
         {
