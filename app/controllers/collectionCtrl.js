@@ -53,7 +53,7 @@
             }, function () {});
         };
 
-        alert($routeParams);
+        console.log($routeParams);
 
         $scope.db = {
             id: $routeParams.did,
