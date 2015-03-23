@@ -20,8 +20,8 @@
                                 cid: col.id,
                                 cl: encodeURIComponent(col._self)
                             };
+                            $scope.items.push(col);
                         });
-                        $scope.items = cols;
                     }
                 });
             }
