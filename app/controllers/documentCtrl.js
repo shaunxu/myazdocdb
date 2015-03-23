@@ -3,35 +3,39 @@
 
     var controllerName = 'document';
 
-    app.controller('DocumentIndexCtrl', function ($rootScope, $scope, $router, $routeParams, $alert, $modal, api) {
+    app.controller('DocumentCtrl', function ($rootScope, $router, $location, $alert, $modal, api) {
+        var $scope = this;
+
         var refresh = function () {
-            api.request(controllerName, 'list', { collectionLink: $scope.col.collectionLink }, function (error, docs) {
-                if (error) {
-                    $alert(JSON.stringify(error, null, 2));
-                }
-                else {
-                    $scope.documents = [];
-                    docs.forEach(function (doc) {
-                        var model = {
-                            expanded: false,
-                            id: doc.id,
-                            _self: doc._self,
-                            _ts: doc._ts,
-                            _etag: doc._etag,
-                            _rid: doc._rid,
-                            _attachments: doc._attachments
-                        };
-                        delete doc._self;
-                        delete doc._ts;
-                        delete doc._etag;
-                        delete doc._rid;
-                        delete doc._attachments;
-                        model.body = doc;
-                        model.bodyString = JSON.stringify(doc, null, 2);
-                        $scope.documents.push(model);
-                    });
-                }
-            });
+            if ($scope.col.collectionLink) {
+                api.request(controllerName, 'list', { collectionLink: $scope.col.collectionLink }, function (error, docs) {
+                    if (error) {
+                        $alert(JSON.stringify(error, null, 2));
+                    }
+                    else {
+                        $scope.items = [];
+                        docs.forEach(function (doc) {
+                            var model = {
+                                expanded: false,
+                                id: doc.id,
+                                _self: doc._self,
+                                _ts: doc._ts,
+                                _etag: doc._etag,
+                                _rid: doc._rid,
+                                _attachments: doc._attachments
+                            };
+                            delete doc._self;
+                            delete doc._ts;
+                            delete doc._etag;
+                            delete doc._rid;
+                            delete doc._attachments;
+                            model.body = doc;
+                            model.bodyString = JSON.stringify(doc, null, 2);
+                            $scope.items.push(model);
+                        });
+                    }
+                });
+            }
         };
 
         $scope.delete = function (doc) {
@@ -70,11 +74,12 @@
             }, function () {});
         };
 
+        var query = $location.search();
         $scope.col = {
-            databaseId: $routeParams.did,
-            databaseLink: $routeParams.dl,
-            collectionId: $routeParams.cid,
-            collectionLink: $routeParams.cl
+            databaseId: query.did,
+            databaseLink: query.dl,
+            collectionId: query.cid,
+            collectionLink: query.cl
         };
         $rootScope.breadcrumb.items = [
             {
@@ -82,7 +87,7 @@
                 text: 'Databases'
             },
             {
-                href: $router.generate('collection', { did: $scope.col.databaseId, dl: $scope.col.databaseLink}),
+                href: $router.generate('collection', { queryParams: { did: $scope.col.databaseId, dl: $scope.col.databaseLink }}),
                 text: $scope.col.databaseId
             },
             {
