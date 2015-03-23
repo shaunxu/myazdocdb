@@ -3,50 +3,50 @@
 
     var controllerName = 'database';
 
-    app.controller('DatabaseIndexCtrl', function ($rootScope, $router, $alert, $modal, api) {
+    app.controller('DatabaseIndexCtrl', function ($rootScope/*, $router, $alert, $modal, api*/) {
         var refresh = function () {
-            api.request(controllerName, 'list', null, function (error, dbs) {
-                if (error) {
-                    $alert(JSON.stringify(error, null, 2));
-                }
-                else {
-                    this.databases = dbs;
-                }
-            });
+            //api.request(controllerName, 'list', null, function (error, dbs) {
+            //    if (error) {
+            //        $alert(JSON.stringify(error, null, 2));
+            //    }
+            //    else {
+            //        this.databases = dbs;
+            //    }
+            //});
         };
 
         this.delete = function (id, selfLink) {
-            var modalInstance = $modal.open({
-                templateUrl: 'views/database/delete.html',
-                controller: 'DatabaseDeleteCtrl',
-                resolve: {
-                    db: function () {
-                        return {
-                            id: id,
-                            _self: selfLink
-                        };
-                    }
-                }
-            });
-            modalInstance.result.then(function () {
-                refresh();
-            }, function () {});
+            //var modalInstance = $modal.open({
+            //    templateUrl: 'views/database/delete.html',
+            //    controller: 'DatabaseDeleteCtrl',
+            //    resolve: {
+            //        db: function () {
+            //            return {
+            //                id: id,
+            //                _self: selfLink
+            //            };
+            //        }
+            //    }
+            //});
+            //modalInstance.result.then(function () {
+            //    refresh();
+            //}, function () {});
         };
 
         this.create = function () {
-            var modalInstance = $modal.open({
-                templateUrl: 'views/database/create.html',
-                controller: 'DatabaseCreateCtrl'
-            });
-            modalInstance.result.then(function () {
-                refresh();
-            }, function () {});
+            //var modalInstance = $modal.open({
+            //    templateUrl: 'views/database/create.html',
+            //    controller: 'DatabaseCreateCtrl'
+            //});
+            //modalInstance.result.then(function () {
+            //    refresh();
+            //}, function () {});
         };
 
         $rootScope.breadcrumb.items = [
             {
-                href: $router.generate('database', undefined, undefined),
-                text: 'Databases'
+                //href: $router.generate('database', undefined, undefined),
+                //text: 'Databases'
             }
         ];
 
