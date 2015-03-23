@@ -15,7 +15,7 @@
     <tr data-ng-repeat="col in collection.items">
         <td>{{$index + 1}}</td>
         <td>
-            <a ng-link="document({ queryParams: { did: db.id, dl: db.link, cid: collection.id, cl: collection._self }})">{{col.id}}</a>
+            <a ng-link="document({ queryParams: { did: db.id, dl: db.link, cid: col.id, cl: col._self }})">{{col.id}}</a>
         </td>
         <td>{{col._self}}</td>
         <td>{{col._ts}}</td>

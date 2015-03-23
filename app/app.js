@@ -36,7 +36,7 @@ app.run(['$router', function ($router) {
         },
         {
             //path: '/documents/?did&dl&cid&cl',
-            path: '/documents/',
+            path: '/documents',
             component: 'document'
         },
         {
