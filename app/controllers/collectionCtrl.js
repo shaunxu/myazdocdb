@@ -3,7 +3,7 @@
 
     var controllerName = 'collection';
 
-    app.controller('CollectionIndexCtrl', function ($rootScope, $scope, $router, $routeParams, $alert, $modal, api) {
+    app.controller('CollectionCtrl', function ($rootScope, $scope, $router, $routeParams, $alert, $modal, api) {
         var refresh = function () {
             api.request(controllerName, 'list', { databaseLink: $scope.db.link }, function (error, cols) {
                 if (error) {
