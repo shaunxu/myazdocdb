@@ -3,7 +3,7 @@
 
     var controllerName = 'collection';
 
-    app.controller('CollectionCtrl', function ($rootScope, $router, $routeParams, $alert, $modal, api) {
+    app.controller('CollectionCtrl', function ($rootScope, $router, $location, $alert, $modal, api) {
         var $scope = this;
 
         var refresh = function () {
@@ -53,7 +53,7 @@
             }, function () {});
         };
 
-        console.log($routeParams);
+        console.log($location.search());
 
         $scope.db = {
             id: $routeParams.did,
