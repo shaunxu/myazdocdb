@@ -5,7 +5,6 @@
 
     app.controller('DatabaseCtrl', function ($rootScope, $router, $alert, $modal, api) {
         var self = this;
-        console.log('DatabaseCtrl');
 
         var refresh = function () {
             api.request(controllerName, 'list', null, function (error, dbs) {

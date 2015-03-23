@@ -75,6 +75,7 @@
         };
 
         var query = $location.search();
+        console.log(query);
         $scope.col = {
             databaseId: query.did,
             databaseLink: query.dl,

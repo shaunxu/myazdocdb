@@ -5,7 +5,6 @@
 
     app.controller('CollectionCtrl', function ($rootScope, $router, $location, $alert, $modal, api) {
         var $scope = this;
-        console.log('CollectionCtrl');
 
         var refresh = function () {
             if ($scope.db.link) {
@@ -61,7 +60,6 @@
             id: query.did,
             link: query.dl
         };
-        console.log($scope.db);
 
         $rootScope.breadcrumb.items = [
             {
