@@ -4,8 +4,9 @@
     var controllerName = 'database';
 
     app.controller('DatabaseCtrl', function ($rootScope, $router, $alert, $modal, api) {
+        var self = this;
+
         var refresh = function () {
-            var self = this;
             api.request(controllerName, 'list', null, function (error, dbs) {
                 if (error) {
                     $alert(JSON.stringify(error, null, 2));
