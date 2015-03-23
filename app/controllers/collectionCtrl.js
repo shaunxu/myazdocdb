@@ -13,6 +13,7 @@
                         $alert(JSON.stringify(error, null, 2));
                     }
                     else {
+                        $scope.items = [];
                         cols.forEach(function (col) {
                             col.queryParams = {
                                 did: $scope.db.id,
