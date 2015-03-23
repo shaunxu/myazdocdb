@@ -7,6 +7,7 @@
         var $scope = this;
 
         var refresh = function () {
+            console.log($scope.db);
             api.request(controllerName, 'list', { databaseLink: $scope.db.link }, function (error, cols) {
                 if (error) {
                     $alert(JSON.stringify(error, null, 2));
