@@ -12,16 +12,16 @@
     </tr>
     </thead>
     <tbody>
-    <tr data-ng-repeat="collection in collections">
+    <tr data-ng-repeat="col in collection.items">
         <td>{{$index + 1}}</td>
         <td>
-            <a ng-link="document({ did: db.id, dl: db.link, cid: collection.id, cl: collection._self })">{{collection.id}}</a>
+            <a ng-link="document({ did: db.id, dl: db.link, cid: collection.id, cl: collection._self })">{{col.id}}</a>
         </td>
-        <td>{{collection._self}}</td>
-        <td>{{collection._ts}}</td>
-        <td>{{collection._etag}}</td>
+        <td>{{col._self}}</td>
+        <td>{{col._ts}}</td>
+        <td>{{col._etag}}</td>
         <td>
-            <button type="button" class="btn btn-danger btn-xs btn-block" data-ng-click="delete(collection.id, collection._self)">Delete</button>
+            <button type="button" class="btn btn-danger btn-xs btn-block" data-ng-click="delete(col.id, col._self)">Delete</button>
         </td>
     </tr>
     </tbody>
