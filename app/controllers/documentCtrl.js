@@ -8,6 +8,7 @@
 
         var refresh = function () {
             if ($scope.col.collectionLink) {
+                console.log($scope.col.collectionLink);
                 api.request(controllerName, 'list', { collectionLink: $scope.col.collectionLink }, function (error, docs) {
                     if (error) {
                         $alert(JSON.stringify(error, null, 2));
