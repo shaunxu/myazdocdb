@@ -58,6 +58,7 @@
             id: query.did,
             link: query.dl
         };
+        console.log($scope.db);
 
         $rootScope.breadcrumb.items = [
             {
