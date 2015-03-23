@@ -5,6 +5,7 @@
 
     app.controller('CollectionCtrl', function ($rootScope, $router, $location, $alert, $modal, api) {
         var $scope = this;
+        console.log('CollectionCtrl');
 
         var refresh = function () {
             api.request(controllerName, 'list', { databaseLink: $scope.db.link }, function (error, cols) {
