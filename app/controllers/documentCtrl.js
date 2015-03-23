@@ -15,25 +15,27 @@
                     }
                     else {
                         $scope.items = [];
-                        docs.forEach(function (doc) {
-                            var model = {
-                                expanded: false,
-                                id: doc.id,
-                                _self: doc._self,
-                                _ts: doc._ts,
-                                _etag: doc._etag,
-                                _rid: doc._rid,
-                                _attachments: doc._attachments
-                            };
-                            delete doc._self;
-                            delete doc._ts;
-                            delete doc._etag;
-                            delete doc._rid;
-                            delete doc._attachments;
-                            model.body = doc;
-                            model.bodyString = JSON.stringify(doc, null, 2);
-                            $scope.items.push(model);
-                        });
+                        if (docs) {
+                            docs.forEach(function (doc) {
+                                var model = {
+                                    expanded: false,
+                                    id: doc.id,
+                                    _self: doc._self,
+                                    _ts: doc._ts,
+                                    _etag: doc._etag,
+                                    _rid: doc._rid,
+                                    _attachments: doc._attachments
+                                };
+                                delete doc._self;
+                                delete doc._ts;
+                                delete doc._etag;
+                                delete doc._rid;
+                                delete doc._attachments;
+                                model.body = doc;
+                                model.bodyString = JSON.stringify(doc, null, 2);
+                                $scope.items.push(model);
+                            });
+                        }
                     }
                 });
             }
