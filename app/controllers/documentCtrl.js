@@ -77,10 +77,10 @@
         var query = $location.search();
         console.log(query);
         $scope.col = {
-            databaseId: query.did,
-            databaseLink: query.dl,
-            collectionId: query.cid,
-            collectionLink: query.cl
+            databaseId: decodeURIComponent(query.did),
+            databaseLink: decodeURIComponent(query.dl),
+            collectionId: decodeURIComponent(query.cid),
+            collectionLink: decodeURIComponent(query.cl)
         };
         $rootScope.breadcrumb.items = [
             {

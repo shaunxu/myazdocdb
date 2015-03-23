@@ -5,7 +5,6 @@
 
     app.controller('CollectionCtrl', function ($rootScope, $router, $location, $alert, $modal, api) {
         var $scope = this;
-        console.log('CollectionCtrl');
 
         var refresh = function () {
             if ($scope.db.link) {
