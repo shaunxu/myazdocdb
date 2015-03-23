@@ -13,6 +13,14 @@
                         $alert(JSON.stringify(error, null, 2));
                     }
                     else {
+                        cols.forEach(function (col) {
+                            col.queryParams = {
+                                did: $scope.db.id,
+                                dl: encodeURIComponent($scope.db.link),
+                                cid: col.id,
+                                cl: encodeURIComponent(col._self)
+                            };
+                        });
                         $scope.items = cols;
                     }
                 });
