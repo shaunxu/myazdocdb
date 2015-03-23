@@ -53,11 +53,10 @@
             }, function () {});
         };
 
-        console.log($location.search());
-
+        var query = $location.search();
         $scope.db = {
-            id: $routeParams.did,
-            link: $routeParams.dl
+            id: query.did,
+            link: query.dl
         };
         $rootScope.breadcrumb.items = [
             {
